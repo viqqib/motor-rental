@@ -1,0 +1,57 @@
+# Laravel-specific files
+/vendor
+/node_modules
+/public/storage
+/storage/*.key
+.env
+.env.*.backup
+
+# Laravel 5 & 6 specific
+/vendor/*
+/node_modules/*
+/public/storage/*
+
+# Ignore specific environment and backup files
+/.env
+/.env.local
+/.env.testing
+/.env.production
+
+# IDEs and editor specific
+/.vscode
+/.idea
+*.sublime-workspace
+*.sublime-project
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Composer specific
+composer.lock
+composer.phar
+
+# NPM or Yarn specific
+yarn-error.log
+npm-debug.log
+
+# Log files
+*.log
+
+# Laravel Cache and Logs
+/storage/*.log
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+/storage/app/*
+/storage/app/public/*
+
+# Test results
+/tests/_output
+/phpunit.result.cache
+
+# Laravel Telescope specific
+/.telescope
+
+# Laravel Horizon specific
+/horizon

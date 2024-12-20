@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "@fontsource/bree-serif"; /* Bree Serif */
+@import "@fontsource/montserrat"; /* Montserrat */
+
