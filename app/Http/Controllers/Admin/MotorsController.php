@@ -48,7 +48,6 @@ class MotorsController extends Controller
         Session::flash('warna', $request->warna);
         Session::flash('harga_jam', $request->harga_jam);
         Session::flash('status', $request->status);
-        Session::flash('gambar', $request->gambar);
     
 
         // Validate the request data
@@ -73,6 +72,9 @@ class MotorsController extends Controller
             'harga_jam.integer' => 'Harga per jam harus berupa angka.',
             'status.required' => 'Status motor wajib dipilih.',
             'status.in' => 'Status motor harus berupa salah satu dari: tersedia atau tidak tersedia.',
+            'gambar.required' => 'Gambar motor wajib diunggah.',
+            'gambar.mimes' => 'Gambar harus berformat png, jpg, atau jpeg.',
+            'gambar.max' => 'Ukuran gambar tidak boleh lebih dari 2MB.',
         ]);
     
         // Handle the image upload

@@ -6,9 +6,10 @@
     <div class="md:px-32 px-5 mt-5 ">
         <div class="bg-white px-5 py-5 rounded-md flex  md:flex-row flex-col">
             
+          
             <div class="bike-img">
                 <img 
-                    src="{{ asset('images/bike.png') }}" 
+                    src="{{ asset('storage/' . $motor->gambar) }}"
                     alt="{{ $motor->tipe }}" 
                     class="md:w-[600px] md:h-[450px] w-full h-[260px] rounded-md"
                 />

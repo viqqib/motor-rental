@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="mx-auto md:pt-1 px-5 pt-1 md:px-1 lg:px-32 md:mt-5 mt-3 pb-10">
-        <h2 class="font-semibold md:text-4xl text-xl">Motor Tersedia</h2>
+        <h2 class="text-base md:text-2xl font-semibold">Motor Tersedia</h2>
 
         <div class="w-full mx-auto md:px-0  h-auto py-6 flex flex-wrap md:flex-row gap-x-5 justify-center gap-y-4 mt-5">
             @foreach($motors as $motor)
@@ -43,7 +43,7 @@
         </div>
 
 
-        <h2 class="font-semibold md:text-4xl text-xl">Sedang Dirental</h2>
+        <h2 class="text-base md:text-2xl font-semibold">Sedanng Dirental</h2>
 
         <div class="w-full mx-auto md:px-0  h-auto py-6 flex flex-wrap md:flex-row gap-x-5 justify-center gap-y-4 mt-5">
             @foreach($rented_motors as $motor)
@@ -53,7 +53,7 @@
                         <p class="bike-type text-sm md:text-xl -mt-1 font-bold">{{ $motor->tipe }} {{ $motor->tahun }}</p>
                     </div>
                     <div class="bike-img my-1 md:my-2">
-                        <img src="{{ asset('images/bike.png') }}" alt="motorbike" class="w-full h-[100px] md:h-[170px] rounded-md">
+                        <img src="{{ asset('storage/' . $motor->gambar) }}" alt="{{ $motor->tipe }}" class="w-full h-[100px] md:h-[170px] rounded-md">
                     </div>
 
                     <div class="bike-price pb-1">
