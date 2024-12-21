@@ -17,4 +17,8 @@ class Motor extends Model
     protected $fillable = [
         'tipe', 'merek','tahun', 'warna', 'harga_jam', 'status', 'gambar' 
     ];
+    public function motorHarga()
+    {
+        return $this->hasOne(MotorHarga::class, 'id_motor');
+    }
 }

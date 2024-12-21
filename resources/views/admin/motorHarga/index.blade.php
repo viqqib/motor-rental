@@ -8,7 +8,7 @@
     <div class="flex justify-between items-center mb-4">
         <div class="flex items-center gap-3 text-xl font-semibold">
             <a href="{{ url('admin') }}" class="text-gray-500 hover:text-gray-700">&larr;</a>
-            <h1>List Motor Harga</h1>
+            <h1>Daftar Harga Motor</h1>
         </div>
         <a href="{{ url('admin/motorHarga/create') }}" class="bg-teal-600 hover:bg-teal-700 text-white font-medium py-2 px-4 rounded-md">Tambah Harga</a>
     </div>

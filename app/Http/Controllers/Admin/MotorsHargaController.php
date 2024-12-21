@@ -12,14 +12,24 @@ class MotorsHargaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-           // Fetch all MotorsHarga records
-        $motorsHarga = MotorHarga::paginate(5);
+        
+        $query = $request->query('query'); // Use 'query' as a query parameter
 
-        // Pass the data to the view
+        if (strlen($query)) {
+            // Filter MotorHarga based on the search query, matching 'harga_12_jam', 'harga_24_jam', etc.
+            $motorsHarga = MotorHarga::whereHas('motor', function ($q) use ($query) {
+                $q->where('merek', 'like', '%' . $query . '%') // Search in 'merek' column
+                  ->orWhere('tipe', 'like', '%' . $query . '%') // Or search in 'tipe' column
+                  ->orWhere('tahun', 'like', '%' . $query . '%'); // Or search in 'tahun' column
+            })->paginate(10); // Paginate the results
+        } else {
+            // If no search query, return all records
+            $motorsHarga = MotorHarga::paginate(10);
+        }
+        
         return view('admin.motorHarga.index', compact('motorsHarga'));
-
     }
 
     /**
@@ -27,7 +37,8 @@ class MotorsHargaController extends Controller
      */
     public function create()
     {
-        $motors = Motor::all();
+        $motors = Motor::whereDoesntHave('motorHarga')->get();
+
         return view('admin.motorHarga.create', compact('motors'));
     }
 
@@ -86,6 +97,7 @@ class MotorsHargaController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        MotorHarga::where('id', $id)->delete();
+        return redirect()->route('admin.motorHarga.index')->with('success', 'Berhasil Menghapus Data');
     }
 }

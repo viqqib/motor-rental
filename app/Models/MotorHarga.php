@@ -38,8 +38,6 @@ class MotorHarga extends Model
     {
         return $this->belongsTo(Motor::class, 'id_motor');        
     }
-    public function motorHarga()
-{
-    return $this->hasOne(MotorHarga::class, 'id_motor');
-}
+
+
 }

@@ -13,6 +13,21 @@
 
         <!-- Grid Layout -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-gray-100 p-4 rounded shadow">
+                <h2 class="text-lg font-bold mb-4 text-gray-700">Pilih Motor</h2>
+                <div class="mb-4">
+                    <label for="id_motor" class="block text-gray-700 font-bold mb-2">Motor:</label>
+                    <select name="id_motor" id="id_motor" 
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                        <option value="">Pilih Motor</option>
+                        @foreach ($motors as $motor)
+                            <option value="{{ $motor->id }}" {{ Session::get('id_motor') == $motor->id ? 'selected' : '' }}>
+                                {{ $motor->merek }} - {{ $motor->tipe }} ({{ $motor->tahun }})
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
             <!-- Part 1: Harga Details -->
             <div class="bg-gray-100 p-4 rounded shadow">
                 <h2 class="text-lg font-bold mb-4 text-gray-700">Harga Motor</h2>
@@ -43,21 +58,7 @@
             </div>
 
             <!-- Part 2: Motor Selection -->
-            <div class="bg-gray-100 p-4 rounded shadow">
-                <h2 class="text-lg font-bold mb-4 text-gray-700">Pilih Motor</h2>
-                <div class="mb-4">
-                    <label for="id_motor" class="block text-gray-700 font-bold mb-2">Motor:</label>
-                    <select name="id_motor" id="id_motor" 
-                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                        <option value="">Pilih Motor</option>
-                        @foreach ($motors as $motor)
-                            <option value="{{ $motor->id }}" {{ Session::get('id_motor') == $motor->id ? 'selected' : '' }}>
-                                {{ $motor->merek }} - {{ $motor->tipe }} ({{ $motor->tahun }})
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
-            </div>
+            
         </div>
 
         <!-- Submit Button -->
