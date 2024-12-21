@@ -81,16 +81,47 @@ class MotorsHargaController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        // Retrieve the MotorHarga record by its ID
+        $motorHarga = MotorHarga::findOrFail($id);
+
+        // Retrieve all motors that do not yet have a price
+        $motors = Motor::whereDoesntHave('motorHarga')->get();
+
+        // Pass the motorHarga and motors to the view for editing
+        return view('admin.motorHarga.edit', compact('motorHarga', 'motors'));
     }
+
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
     {
-        //
+        // Validate the incoming data
+        $validated = $request->validate([
+            'id_motor' => 'required|exists:motors,id', // Ensure motor exists
+            'harga_12_jam' => 'required|integer|min:0',
+            'harga_24_jam' => 'required|integer|min:0',
+            'harga_1_minggu' => 'required|integer|min:0',
+            'harga_1_bulan' => 'required|integer|min:0',
+        ]);
+
+        // Find the existing MotorHarga record
+        $motorHarga = MotorHarga::findOrFail($id);
+
+        // Update the record with the validated data
+        $motorHarga->update([
+            'id_motor' => $validated['id_motor'],
+            'harga_12_jam' => $validated['harga_12_jam'],
+            'harga_24_jam' => $validated['harga_24_jam'],
+            'harga_1_minggu' => $validated['harga_1_minggu'],
+            'harga_1_bulan' => $validated['harga_1_bulan'],
+        ]);
+
+        // Redirect back with a success message
+        return redirect()->route('admin.motorHarga.index')->with('success', 'Motor price updated successfully.');
     }
+
 
     /**
      * Remove the specified resource from storage.

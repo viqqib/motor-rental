@@ -23,10 +23,11 @@ class MotorController extends Controller
     public function show($id)
     {
         // Fetch the motor by ID
-        $motor = Motor::find($id);
+        $motor = Motor::with('motorHarga')->find($id);
 
-        // Pass the motor data to the view
+        // Pass the motor data and pricing to the view
         return view('frontend.motor.show', compact('motor'));
+;
     }
 
 }

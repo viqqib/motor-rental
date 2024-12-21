@@ -30,7 +30,6 @@
         </form>
     </div>
 
-
     <table class="min-w-full border-collapse border border-gray-300 shadow-sm rounded-lg overflow-hidden">
         <thead>
             <tr class="bg-teal-500 text-white text-sm">
@@ -52,7 +51,15 @@
                 <td class="px-4 py-3 border border-gray-300">{{ $motor->merek }}</td>
                 <td class="px-4 py-3 border border-gray-300">{{ $motor->tahun }}</td>
                 <td class="px-4 py-3 border border-gray-300">{{ $motor->warna }}</td>
-                <td class="px-4 py-3 border border-gray-300">Rp {{ number_format($motor->harga_jam, 0, ',', '.') }}</td>
+                <td class="px-4 py-3 border border-gray-300">
+                    {!! $motor->motorHarga ? 'Rp' . number_format($motor->motorHarga->harga_12_jam, 0, ',', '.') : '<a href="' . url('admin/motorHarga') . '" class="bg-yellow-400 font-bold px-5 py-2 text-gray-700 rounded-md">Tambah Harga</a>' !!}
+
+                </td>
+
+       
+
+               
+                
                 <td class="px-4 py-3 border border-gray-300">
                     <span class="{{ $motor->status === 'tersedia' ? 'text-green-700' : 'text-red-500' }}">
                         {{ ucfirst($motor->status) }}

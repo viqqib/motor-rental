@@ -21,7 +21,8 @@
 
                     <div class="bike-price pb-1">
                         <p class="md:text-2xl text-sm font-bold mb-1 md:mb-1 mt-1">
-                            Rp.{{ $motor->harga_jam }} <span class="text-xs">/ </span>
+                            Rp. {{ $motor->motorHarga ? number_format($motor->motorHarga->harga_12_jam, 0, ',', '.') : 'Harga' }}
+                            <span class="text-xs">/ </span>
                             <span class="text-[0.65rem] font-semibold text-gray-500">12 Jam</span>
                         </p>
 
