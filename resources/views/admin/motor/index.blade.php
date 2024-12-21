@@ -52,13 +52,14 @@
                 <td class="px-4 py-3 border border-gray-300">{{ $motor->tahun }}</td>
                 <td class="px-4 py-3 border border-gray-300">{{ $motor->warna }}</td>
                 <td class="px-4 py-3 border border-gray-300">
-                    {!! $motor->motorHarga ? 'Rp' . number_format($motor->motorHarga->harga_12_jam, 0, ',', '.') : '<a href="' . url('admin/motorHarga') . '" class="bg-yellow-400 font-bold px-5 py-2 text-gray-700 rounded-md">Tambah Harga</a>' !!}
+                    {!! $motor->motorHarga ? 'Rp' . number_format($motor->motorHarga->harga_12_jam, 0, ',', '.'). '<a href="' . url('admin/motorHarga/'.$motor->motorHarga->id.'/edit') . '" class="bg-yellow-400 font-bold px-5 py-2 text-gray-700 rounded-md ml-3 ">Edit Harga</a>' 
+                    : '<a href="' . url('admin/motorHarga') . '" class="bg-red-600 font-bold px-5 py-2 text-white rounded-md">Tambah Harga</a>' !!}
 
                 </td>
 
        
 
-               
+            
                 
                 <td class="px-4 py-3 border border-gray-300">
                     <span class="{{ $motor->status === 'tersedia' ? 'text-green-700' : 'text-red-500' }}">

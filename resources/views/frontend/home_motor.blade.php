@@ -20,15 +20,23 @@
                     <img src="{{ asset('storage/' . $motor->gambar) }}" alt="Motor Image" class="w-full h-[100px] md:h-[170px] rounded-md">
                 </div>
 
+            
+
                 <div class="bike-price pb-1">
                     <p class="md:text-2xl text-sm font-bold mb-1 md:mb-1 mt-1">
-                        Rp.{{ number_format($motor->harga_jam, 0, ',', '.') }} <span class="text-xs">/ </span>
+                        Rp.{{ $motor->motorHarga->harga_12_jam }} <span class="text-xs">/ </span>
                         <span class="text-[0.65rem] font-semibold text-gray-500">12 Jam</span>
                     </p>
 
-                    <button class="w-full text-xs md:text-base py-1.5 md:py-2 font-bold rounded-md duration-300 bg-logo text-white hover:bg-primary">
-                        Rental Sekarang
-                    </button>
+
+                   
+
+                    <a href="{{ route('motor.show', $motor->id) }}">
+                        <button class="w-full text-xs md:text-base py-1.5 md:py-2 font-bold rounded-md duration-300 bg-logo text-white hover:bg-primary">
+                            Cek & Rental Sekarang
+                        </button>
+                    </a>
+
                 </div>
             </div>
             @endforeach

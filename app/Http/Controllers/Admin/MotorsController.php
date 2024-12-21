@@ -23,7 +23,7 @@ class MotorsController extends Controller
                 ->orWhere('tahun', 'like', "%$query%")
                 ->paginate(2);
         } else {
-            $motors = Motor::paginate(10);
+            $motors = Motor::with('motorHarga')->paginate(10);
         }
     
         return view('admin.motor.index', compact('motors'));
