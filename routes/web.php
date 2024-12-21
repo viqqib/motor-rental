@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\MotorsController;
+use App\Http\Controllers\Admin\MotorsHargaController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
@@ -34,5 +35,6 @@ Route::get('/admin', [AdminController::class, 'index']);
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('motor', MotorsController::class); // This handles all CRUD operations, including PUT
+    Route::resource('motorHarga', MotorsHargaController::class);
 });
 
