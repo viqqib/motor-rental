@@ -46,7 +46,6 @@ class MotorsController extends Controller
         Session::flash('merek', $request->merek);
         Session::flash('tahun', $request->tahun);
         Session::flash('warna', $request->warna);
-        Session::flash('harga_jam', $request->harga_jam);
         Session::flash('status', $request->status);
     
 
@@ -56,7 +55,6 @@ class MotorsController extends Controller
             'merek' => 'required|string|max:255',
             'tahun' => 'required|integer|digits:4|min:1900|max:' . date('Y'),
             'warna' => 'required|in:Hitam,Putih,Merah,Biru,Hijau,Kuning',
-            'harga_jam' => 'required|integer',
             'status' => 'required|in:tersedia,tidak tersedia',
             'gambar' => 'required|mimes:png,jpg,jpeg|max:2048',
         ], [
@@ -68,8 +66,6 @@ class MotorsController extends Controller
             'tahun.digits' => 'Tahun motor harus terdiri dari 4 digit.',
             'tahun.min' => 'Tahun motor tidak boleh kurang dari 1900.',
             'tahun.max' => 'Tahun motor tidak boleh lebih dari tahun saat ini.',
-            'harga_jam.required' => 'Harga per jam wajib diisi.',
-            'harga_jam.integer' => 'Harga per jam harus berupa angka.',
             'status.required' => 'Status motor wajib dipilih.',
             'status.in' => 'Status motor harus berupa salah satu dari: tersedia atau tidak tersedia.',
             'gambar.required' => 'Gambar motor wajib diunggah.',
@@ -90,7 +86,6 @@ class MotorsController extends Controller
             'merek' => $validated['merek'],
             'tahun' => $validated['tahun'],
             'warna' => $validated['warna'],  
-            'harga_jam' => $validated['harga_jam'],
             'status' => $validated['status'],
             'gambar' => $path ?? null,  // Store the image path in the database
         ]);
@@ -128,7 +123,6 @@ class MotorsController extends Controller
         'merek' => 'required|string|max:255',
         'tahun' => 'required|integer|digits:4|min:1900|max:' . date('Y'),
         'warna' => 'required|in:Hitam,Putih,Merah,Biru,Hijau,Kuning',
-        'harga_jam' => 'required|integer',
         'status' => 'required|in:tersedia,tidak tersedia',
         'gambar' => 'nullable|mimes:png,jpg,jpeg|max:2048', // Gambar is optional in update
     ], [
@@ -140,8 +134,6 @@ class MotorsController extends Controller
         'tahun.digits' => 'Tahun motor harus terdiri dari 4 digit.',
         'tahun.min' => 'Tahun motor tidak boleh kurang dari 1900.',
         'tahun.max' => 'Tahun motor tidak boleh lebih dari tahun saat ini.',
-        'harga_jam.required' => 'Harga per jam wajib diisi.',
-        'harga_jam.integer' => 'Harga per jam harus berupa angka.',
         'status.required' => 'Status motor wajib dipilih.',
         'status.in' => 'Status motor harus berupa salah satu dari: tersedia atau tidak tersedia.',
     ]);
@@ -168,7 +160,6 @@ class MotorsController extends Controller
         'merek' => $validated['merek'],
         'tahun' => $validated['tahun'],
         'warna' => $validated['warna'],
-        'harga_jam' => $validated['harga_jam'],
         'status' => $validated['status'],
         'gambar' => isset($path) ? $path : $motor->gambar, // Update image only if a new one is uploaded
     ]);

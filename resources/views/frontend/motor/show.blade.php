@@ -80,17 +80,62 @@
                     @endif
                 </p>
 
-                <button
-                    class="w-full {{ $motor->status === 'tersedia' ? 'bg-logo' : 'bg-gray-400 cursor-not-allowed' }} text-white font-bold rounded-md py-3 text-lg mt-5"
-                    {{ $motor->status !== 'tersedia' ? 'disabled' : '' }}
-                >
-                    {{ $motor->status === 'tersedia' ? 'Rental Sekarang' : 'Tidak Tersedia' }}
-                </button>
+                <a href="#" id="rental-now" target="_blank">
+                    <button class="w-full {{ $motor->status === 'tersedia' ? 'bg-logo' : 'bg-gray-400 cursor-not-allowed' }} text-white font-bold rounded-md py-3 text-lg mt-5"
+                        {{ $motor->status !== 'tersedia' ? 'disabled' : '' }}>
+                        {{ $motor->status === 'tersedia' ? 'Rental Sekarang' : 'Tidak Tersedia' }}
+                    </button>
+                </a>
+
             </div>
         </div>
     </div>
 
     <script>
+    document.getElementById('rental-now').addEventListener('click', function(event) {
+    event.preventDefault(); // Prevent the default behavior
+
+    // Fetch the selected duration and price dynamically
+    var selectedDuration = document.getElementById('rental-duration').value;
+    var motorName = "{{ $motor->merek }} {{ $motor->tipe }}";  // Motor name from PHP
+    var totalPrice = document.getElementById('price-display').textContent.replace(/\./g, ''); // Remove periods for calculation
+
+    // Map duration values to readable labels
+    var rentalDurationValue = '';
+    var rentalType = ''
+    if (selectedDuration === 'harga_12_jam') {
+        rentalDurationValue = "12 jam";
+        rentalType = "setengah harian"
+    } else if (selectedDuration === 'harga_24_jam') {
+        rentalDurationValue = document.getElementById('rental-days').value + " hari";
+        rentalType = "harian"
+    } else if (selectedDuration === 'harga_1_minggu') {
+        rentalDurationValue = document.getElementById('rental-weeks').value + " minggu";
+         rentalType = "mingguan"
+    } else if (selectedDuration === 'harga_1_bulan') {
+        rentalDurationValue = document.getElementById('rental-months').value + " bulan";
+         rentalType = "bulanan"
+    }
+
+    // Ensure price is formatted correctly
+    totalPrice = new Intl.NumberFormat('id-ID').format(parseInt(totalPrice));
+
+    // Construct the WhatsApp message dynamically
+    var message = `Halo Three J Rental, Saya mau sewa ${rentalType} ${motorName} durasi ${rentalDurationValue} dengan harga Rp. ${totalPrice}`;
+
+// Update the WhatsApp link dynamically
+        var whatsappUrl = `https://wa.me/+6289627728613?text=${encodeURIComponent(message)}`;
+
+        // Open the WhatsApp link
+        window.open(whatsappUrl, '_blank');
+
+    // Open the WhatsApp link
+    window.open(whatsappUrl, '_blank');
+});
+
+
+
+        
         document.getElementById('rental-duration').addEventListener('change', function() {
             var selectedOption = this.options[this.selectedIndex];
             var selectedPrice = selectedOption.getAttribute('data-price');

@@ -87,12 +87,7 @@
             <div class="bg-gray-100 p-4 rounded shadow">
                 <h2 class="text-lg font-bold mb-4 text-gray-700">Part 3: Detail</h2>
 
-                <div class="mb-4">
-                    <label for="harga_jam" class="block text-gray-700 font-bold mb-2">Harga per 12 Jam:</label>
-                    <input type="number" name="harga_jam" id="harga_jam" 
-                           value="{{ old('harga_jam', $data->harga_jam) }}" 
-                           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                </div> 
+
                 
                 <div class="mb-4">
                     <label for="status" class="block text-gray-700 font-bold mb-2">Status:</label>
