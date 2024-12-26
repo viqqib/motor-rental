@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\HomepageSettingsController;
 use App\Http\Controllers\Admin\MotorsController;
 use App\Http\Controllers\Admin\MotorsHargaController;
 use App\Http\Controllers\Admin\SessionController;
@@ -40,8 +41,9 @@ Route::prefix('admin')
     ->group(function () {
         Route::resource('motor', MotorsController::class);
         Route::resource('motorHarga', MotorsHargaController::class);
+        Route::resource('homepageContent', HomepageSettingsController::class);
     });
-
+    
 Route::get('/admin/session', [SessionController::class, 'index'])->middleware(isLogged::class);
 Route::post('/admin/session/login', [SessionController::class, 'login']);
 Route::get('/admin/session/logout', [SessionController::class, 'logout']);

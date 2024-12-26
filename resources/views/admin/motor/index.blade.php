@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Home')
+@section('title', 'Data Motor')
 
 @section('content')
 
@@ -30,7 +30,7 @@
                 <th class="px-4 py-2 border border-gray-300">Tipe</th>
                 <th class="px-4 py-2 border border-gray-300">Merek</th>
                 <th class="px-4 py-2 border border-gray-300">Tahun</th>
-                <th class="px-4 py-2 border border-gray-300">Nomor Plat</th>
+                <th class="px-4 py-2 border border-gray-300">Nomor Polisi</th>
                 <th class="px-4 py-2 border border-gray-300">Warna</th>
                 <th class="px-4 py-2 border border-gray-300">Harga/12 Jam</th>
                 <th class="px-4 py-2 border border-gray-300">Status</th>

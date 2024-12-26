@@ -2,7 +2,7 @@
 
 @extends('admin.layouts.app')
 
-@section('title', 'Motor Harga Form')
+@section('title', 'Data Harga Motor')
 
 @section('content')
 

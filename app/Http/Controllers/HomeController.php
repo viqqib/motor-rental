@@ -4,6 +4,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\HomepageContent;
 use App\Models\Motor;
 
 class HomeController extends Controller
@@ -15,8 +16,9 @@ class HomeController extends Controller
 
         $availableCount = Motor::where('status', 'tersedia')->count();
 
+        $heroContents = HomepageContent::where('section', 'hero')->first();
         // Pass the motors and count to the home view
-        return view('frontend.home', compact('motors', 'availableCount'));
+        return view('frontend.home', compact('motors', 'availableCount', 'heroContents'));
         // Pass the motors to the home view
     }
 }
