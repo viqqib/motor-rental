@@ -24,8 +24,12 @@
 
                 <div class="bike-price pb-1">
                     <p class="md:text-2xl text-sm font-bold mb-1 md:mb-1 mt-1">
-                        Rp.{{ $motor->motorHarga->harga_12_jam }} <span class="text-xs">/ </span>
-                        <span class="text-[0.65rem] font-semibold text-gray-500">12 Jam</span>
+                        @if ($motor->motorHarga && $motor->motorHarga->harga_12_jam)
+                            Rp.{{ $motor->motorHarga->harga_12_jam }} <span class="text-xs">/ </span>
+                            <span class="text-[0.65rem] font-semibold text-gray-500">12 Jam</span>
+                        @else
+                            <span class="text-sm font-semibold text-gray-500">Harga belum tersedia</span>
+                        @endif
                     </p>
 
 

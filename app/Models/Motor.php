@@ -15,7 +15,7 @@ class Motor extends Model
 
     // Specify the columns you want to be mass assignable (for example, if you want to fill these columns using create or update)
     protected $fillable = [
-        'tipe', 'merek','tahun', 'warna', 'status', 'gambar' 
+        'nomor_plat','tipe', 'merek','tahun', 'warna', 'status', 'gambar' 
     ];
     public function motorHarga()
     {

@@ -4,16 +4,7 @@
 
 @section('content')
 
-@if ($errors->any())
-    <div class="mb-4">
-        <ul class="text-red-500 text-sm">
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
-<div class="min-h-screen flex items-center justify-center bg-gray-100">
+<div class="mt-28 flex items-center justify-center bg-gray-100">
     <div class="w-full max-w-sm bg-white shadow-md rounded-lg p-6">
         <h2 class="text-2xl font-bold text-center text-gray-700 mb-4">Login</h2>
         <form action="/admin/session/login" method="POST" class="space-y-4">
@@ -23,7 +14,7 @@
                 <label for="email" class="block text-gray-700 font-bold mb-2">Email:</label>
                 <input type="email" name="email" id="email" 
                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
-                       >
+                       value="{{ Session::get('email') }}">
             </div>
 
             <!-- Password Input -->
@@ -48,6 +39,18 @@
                     Login
                 </button>
             </div>
+
+
+            @if ($errors->any())
+            <div class="mb-4">
+                <ul class="text-red-500 text-sm">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+
         </form>
     </div>
 </div>

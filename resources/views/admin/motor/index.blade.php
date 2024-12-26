@@ -5,13 +5,6 @@
 @section('content')
 
 <div class="">
-    <div class="flex justify-between items-center mb-4">
-        <div class="flex items-center gap-3 text-xl font-semibold">
-            <a href="{{ url('admin') }}" class="text-gray-500 hover:text-gray-700">&larr;</a>
-            <h1>List Motor</h1>
-        </div>
-        <a href="{{ url('admin/motor/create') }}" class="bg-teal-600 hover:bg-teal-700 text-white font-medium py-2 px-4 rounded-md">Tambah Motor</a>
-    </div>
 
     {{-- Search Form --}}
     <div class="mb-4">
@@ -20,7 +13,7 @@
                 type="text" 
                 name="query" 
                 id="search" 
-                placeholder="Search..." 
+                placeholder="Cari Motor..." 
                 class="flex-grow py-2 px-3 text-gray-700 focus:outline-none focus:ring focus:border-blue-300"
                 value="{{ Request::get('query') }}"
             >
@@ -37,6 +30,7 @@
                 <th class="px-4 py-2 border border-gray-300">Tipe</th>
                 <th class="px-4 py-2 border border-gray-300">Merek</th>
                 <th class="px-4 py-2 border border-gray-300">Tahun</th>
+                <th class="px-4 py-2 border border-gray-300">Nomor Plat</th>
                 <th class="px-4 py-2 border border-gray-300">Warna</th>
                 <th class="px-4 py-2 border border-gray-300">Harga/12 Jam</th>
                 <th class="px-4 py-2 border border-gray-300">Status</th>
@@ -50,6 +44,7 @@
                 <td class="px-4 py-3 border border-gray-300">{{ $motor->tipe }}</td>
                 <td class="px-4 py-3 border border-gray-300">{{ $motor->merek }}</td>
                 <td class="px-4 py-3 border border-gray-300">{{ $motor->tahun }}</td>
+                <td class="px-4 py-3 border border-gray-300">{{ $motor->nomor_plat }}</td>
                 <td class="px-4 py-3 border border-gray-300">{{ $motor->warna }}</td>
                 <td class="px-4 py-3 border border-gray-300">
                     {!! $motor->motorHarga ? 'Rp' . number_format($motor->motorHarga->harga_12_jam, 0, ',', '.'). '<a href="' . url('admin/motorHarga/'.$motor->motorHarga->id.'/edit') . '" class="bg-yellow-400 font-bold px-5 py-2 text-gray-700 rounded-md ml-3 ">Edit Harga</a>' 
@@ -92,6 +87,10 @@
 
     <div class="mt-4">
         {{ $motors->appends(request()->query())->links('pagination::tailwind') }}
+    </div>
+
+    <div class="flex justify-between items-center mb-4">
+        <a href="{{ url('admin/motor/create') }}" class="bg-teal-600 hover:bg-teal-700 text-white font-medium py-2 px-4 rounded-md">Tambah Motor</a>
     </div>
 </div>
 

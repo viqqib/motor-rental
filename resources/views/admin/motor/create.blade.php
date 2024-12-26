@@ -15,7 +15,14 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <!-- Part 1: Basic Information -->
             <div class="bg-gray-100 p-4 rounded shadow">
-                <h2 class="text-lg font-bold mb-4 text-gray-700">Nama Motor</h2>
+                {{-- <h2 class="text-lg font-bold mb-4 text-gray-700">Nama Motor</h2> --}}
+                <div class="mb-4">
+                    <label for="tipe" class="block text-gray-700 font-bold mb-2">Nomor Plat:</label>
+                    <input type="text" name="nomor_plat" id="nomor_plat" 
+                           value="{{ old('nomor_plat') }}" 
+                           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                </div>
+
                 <div class="mb-4">
                     <label for="tipe" class="block text-gray-700 font-bold mb-2">Tipe:</label>
                     <input type="text" name="tipe" id="tipe" 
@@ -49,6 +56,13 @@
                     </select>
                 </div>
 
+                
+            </div>
+
+            <!-- Part 2 -->
+            <div class="bg-gray-100 p-4 rounded shadow">
+                <h2 class="text-lg font-bold mb-4 text-gray-700">Detail</h2>
+
                 {{-- WARNA --}}
                 <div class="mb-4">
                     <label for="warna" class="block text-gray-700 font-bold mb-2">Warna:</label>
@@ -79,12 +93,6 @@
                         </label>
                     </div>
                 </div>
-            </div>
-
-            <!-- Part 2 -->
-            <div class="bg-gray-100 p-4 rounded shadow">
-                <h2 class="text-lg font-bold mb-4 text-gray-700">Detail</h2>
-
 
 
                 <div class="mb-4">
@@ -93,6 +101,7 @@
                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                         <option value="tersedia" {{ old('status') == 'tersedia' ? 'selected' : '' }}>Tersedia</option>
                         <option value="tidak tersedia" {{ old('status') == 'tidak tersedia' ? 'selected' : '' }}>Tidak Tersedia</option>
+                        <option value="perawatan" {{ old('status') == 'perawatan' ? 'selected' : '' }}>Perawatan</option>
                     </select>
                 </div>
 

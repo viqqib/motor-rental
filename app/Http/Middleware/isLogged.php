@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class AdminMiddleware
+class isLogged
 {
     /**
      * Handle an incoming request.
@@ -16,11 +16,9 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::check())
+        if(Auth::check()){
+            return redirect('admin')->with('success', 'Kamu telah login');
+        }
         return $next($request);
-
-        return redirect('admin/session')->withErrors('Silahkan login terlebih dahulu');
     }
-
-
 }

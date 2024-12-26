@@ -47,20 +47,24 @@ class MotorsController extends Controller
         Session::flash('tahun', $request->tahun);
         Session::flash('warna', $request->warna);
         Session::flash('status', $request->status);
+        Session::flash('nomor_plat', $request->plat_nomor);
     
 
         // Validate the request data
         $validated = $request->validate([
             'tipe' => 'required|string|max:255',
+            'nomor_plat' => 'required|unique:motors|max:10',
             'merek' => 'required|string|max:255',
             'tahun' => 'required|integer|digits:4|min:1900|max:' . date('Y'),
-            'warna' => 'required|in:Hitam,Putih,Merah,Biru,Hijau,Kuning',
-            'status' => 'required|in:tersedia,tidak tersedia',
+            'warna' => 'required|in:Hitam,Putih,Merah,Biru,Hijau,Kuning,Silver',
+            'status' => 'required|in:tersedia,tidak tersedia,perawatan',
             'gambar' => 'required|mimes:png,jpg,jpeg|max:2048',
         ], [
             'tipe.required' => 'Tipe motor wajib diisi.',
             'merek.required' => 'Merek motor wajib diisi.',
             'tahun.required' => 'Tahun motor wajib diisi.',
+            'nomor_plat.required' => 'Plat nomor kendaraan wajib diisi ',
+            'nomor_plat.unique' => 'Plat nomor telah terdaftar ',
             'tahun.integer' => 'Tahun motor harus berupa angka.',
             'warna.required' => 'Warna Harus Dipilih',
             'tahun.digits' => 'Tahun motor harus terdiri dari 4 digit.',
@@ -82,6 +86,7 @@ class MotorsController extends Controller
     
         // Create a new motor entry
         Motor::create([
+            'nomor_plat' => $validated['nomor_plat'],
             'tipe' => $validated['tipe'],
             'merek' => $validated['merek'],
             'tahun' => $validated['tahun'],
@@ -123,7 +128,7 @@ class MotorsController extends Controller
         'merek' => 'required|string|max:255',
         'tahun' => 'required|integer|digits:4|min:1900|max:' . date('Y'),
         'warna' => 'required|in:Hitam,Putih,Merah,Biru,Hijau,Kuning',
-        'status' => 'required|in:tersedia,tidak tersedia',
+        'status' => 'required|in:tersedia,tidak tersedia,perawatan',
         'gambar' => 'nullable|mimes:png,jpg,jpeg|max:2048', // Gambar is optional in update
     ], [
         'tipe.required' => 'Tipe motor wajib diisi.',

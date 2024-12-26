@@ -5,13 +5,6 @@
 @section('content')
 
 <div class="">
-    <div class="flex justify-between items-center mb-4">
-        <div class="flex items-center gap-3 text-xl font-semibold">
-            <a href="{{ url('admin') }}" class="text-gray-500 hover:text-gray-700">&larr;</a>
-            <h1>Daftar Harga Motor</h1>
-        </div>
-        <a href="{{ url('admin/motorHarga/create') }}" class="bg-teal-600 hover:bg-teal-700 text-white font-medium py-2 px-4 rounded-md">Tambah Harga</a>
-    </div>
 
     {{-- Search Form --}}
     <div class="mb-4">
@@ -20,7 +13,7 @@
                 type="text" 
                 name="query" 
                 id="search" 
-                placeholder="Search..." 
+                placeholder="Cari Motor..." 
                 class="flex-grow py-2 px-3 text-gray-700 focus:outline-none focus:ring focus:border-blue-300"
                 value="{{ Request::get('query') }}"
             >
@@ -77,6 +70,10 @@
 
     <div class="mt-4">
         {{ $motorsHarga->appends(request()->query())->links('pagination::tailwind') }}
+    </div>
+
+    <div class="flex justify-between items-center mb-4">
+        <a href="{{ url('admin/motorHarga/create') }}" class="bg-teal-600 hover:bg-teal-700 text-white font-medium py-2 px-4 rounded-md">Tambah Harga Motor</a>
     </div>
 </div>
 

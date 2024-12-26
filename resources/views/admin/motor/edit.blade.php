@@ -95,6 +95,7 @@
                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                         <option value="tersedia" {{ old('status', $data->status) == 'tersedia' ? 'selected' : '' }}>Tersedia</option>
                         <option value="tidak tersedia" {{ old('status', $data->status) == 'tidak tersedia' ? 'selected' : '' }}>Tidak Tersedia</option>
+                        <option value="perawatan" {{ old('status', $data->status) == 'perawatan' ? 'selected' : '' }}>Perawatan</option>
                     </select>
                 </div>
 
