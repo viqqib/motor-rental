@@ -33,26 +33,32 @@ Route::get('/motor/{id}', [MotorController::class, 'show'])->name('motor.show');
 Route::get('/admin', [AdminController::class, 'index'])->middleware('is_admin');
 
 // Admin Routes - Motors
+// Admin Routes - Motors
 Route::prefix('admin')
     ->name('admin.')
     ->middleware('is_admin')
     ->group(function () {
         Route::resource('motor', MotorsController::class);
         Route::resource('motorHarga', MotorsHargaController::class);
-        Route::resource('content/homepage', ContentHomepageController::class);
-        Route::resource('settings', SettingsController::class);
     });
 
-// Admin Routes - Settings & Social Links
-
-
 // Admin Routes - Content Homepage
-Route::prefix('admin')
+Route::prefix('admin/content')
     ->name('admin.content.')
     ->middleware('is_admin')
     ->group(function () {
         Route::resource('homepage', ContentHomepageController::class);
     });
+
+
+Route::prefix('admin/settings')
+    ->name('admin.settings.')
+    ->middleware('is_admin')
+    ->group(function () {
+        Route::resource('/', SettingsController::class);
+        Route::resource('social-link', SettingsSocialLinksController::class);
+    });
+
 
 // Admin Session Routes
 Route::get('/admin/session', [SessionController::class, 'index'])->middleware(isLogged::class);

@@ -1,7 +1,7 @@
 <nav>
     <div class="w-full bg-white shadow-md py-5 md:py-6 px-5 md:px-32 flex justify-between">
         <div class="logo">
-            <span class="font-bold text-base md:text-3xl text-logo">Three J Rental Motor</span>
+            <span class="font-bold text-base md:text-3xl text-logo">{{ $websiteInfo->name }}</span>
         </div>
 
         <div class="md:block hidden">

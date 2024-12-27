@@ -11,10 +11,10 @@
 
     <div class="center flex w-full justify-between mt-4">
         <div>
-            <p class="md:w-72 w-52 leading-5 text-xs md:text-base">Rental motor murah Yogyakarta Rental motor tanpa</p>
+            <p class="md:w-[700px] w-52 leading-5 text-xs md:text-base">{{ $websiteInfo->description }}</p>
             <div class="location md:flex gap-x-2 mt-7 justify-center items-center hidden">
                 <i class="fa fa-map-marker text-white hover:text-red-800 text-xl"></i>
-                <p class="md:text-base text-xs">Jl. Ringin raya 122 Mancasan Lor Dero Condongcatur Depok Sleman</p>
+                <p class="md:text-base text-xs">{{ $websiteInfo->address }}</p>
             </div>
         </div>
 
@@ -27,7 +27,7 @@
             </a> --}}
             @foreach ($socialLinks as $socialLink)
             @if ($socialLink->link) <!-- Check if there is a valid link -->
-                <a href="{{ $socialLink->link }}" target="_blank" rel="noopener noreferrer">
+                <a href="{{ $socialLink->link.$socialLink->identifier }}" target="_blank" rel="noopener noreferrer">
                     <i class="fab fa-{{ strtolower($socialLink->name) }}"></i>
                 </a>
             @endif

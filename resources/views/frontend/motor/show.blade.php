@@ -92,6 +92,8 @@
     </div>
 
     <script>
+    var whatsappNumber = @json($whatsappNumber->identifier);
+
     document.getElementById('rental-now').addEventListener('click', function(event) {
     event.preventDefault(); // Prevent the default behavior
 
@@ -124,7 +126,7 @@
     var message = `Halo Three J Rental, Saya mau sewa ${rentalType} ${motorName} durasi ${rentalDurationValue} dengan harga Rp. ${totalPrice}`;
 
 // Update the WhatsApp link dynamically
-        var whatsappUrl = `https://wa.me/+6289627728613?text=${encodeURIComponent(message)}`;
+        var whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 
         // Open the WhatsApp link
         window.open(whatsappUrl, '_blank');

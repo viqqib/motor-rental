@@ -17,15 +17,6 @@ class SettingsController extends Controller
         return view('admin.settings.index', compact('socialLinks'));
     }
 
-    public function socialLinks()
-    {
-        return view('admin.settings.socialLinks.index');
-    }
-
-    public function editSocialLinks() 
-    {
-        return view('admin.settings.editSocialLinks');
-    }
 
     /**
      * Show the form for creating a new resource.
