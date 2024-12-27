@@ -3,19 +3,28 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\SocialLink;
 use Illuminate\Http\Request;
 
-class AdminController extends Controller
+class SettingsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-  
     public function index()
+    {   
+        $socialLinks = SocialLink::all();
+        return view('admin.settings.index', compact('socialLinks'));
+    }
+
+    public function socialLinks()
     {
-        // Admin dashboard logic
-        
-        return view('admin.dashboard');
+        return view('admin.settings.socialLinks.index');
+    }
+
+    public function editSocialLinks() 
+    {
+        return view('admin.settings.editSocialLinks');
     }
 
     /**

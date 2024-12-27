@@ -3,12 +3,8 @@
         <div class="logo">
             <span class="font-bold text-base md:text-xl text-primary">
                 {{ Request::is('admin') ? 'Dashboard' : '' }}
-                {{ Request::is('admin/motor') ? 'Daftar Motor' : '' }}
-                {{ Request::is('admin/motor/create') ? 'Masukkan Data Motor' : '' }}
-                {{ Request::is('admin/motor/edit') ? 'Update Data Motor' : '' }}
-                {{ Request::is('admin/motorHarga') ? 'Daftar Harga Motor' : '' }}
-                {{ Request::is('admin/motorHarga/create') ? 'Masukkan Harga Motor' : '' }}
-                {{ Request::is('admin/motorHarga/edit') ? 'Update Data Hargan Motor' : '' }}
+                {{ Request::is('admin/motor*') ? 'Data Motor' : '' }}
+                {{ Request::is('admin/content*') ? 'Edit Konten' : '' }}
             </span>
         </div>
 

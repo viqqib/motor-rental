@@ -124,7 +124,7 @@ class MotorsController extends Controller
 {
     // Validate the request data
     $validated = $request->validate([
-        'nomor_plat' => 'required|unique:motors|max:10',
+        'nomor_plat' => 'required|max:10',
         'tipe' => 'required|string|max:255',
         'merek' => 'required|string|max:255',
         'tahun' => 'required|integer|digits:4|min:1900|max:' . date('Y'),
@@ -136,7 +136,7 @@ class MotorsController extends Controller
         'merek.required' => 'Merek motor wajib diisi.',
         'tahun.required' => 'Tahun motor wajib diisi.',
         'nomor_plat.required' => 'Plat nomor kendaraan wajib diisi ',
-        'nomor_plat.unique' => 'Plat nomor telah terdaftar ',
+        // 'nomor_plat.unique' => 'Plat nomor telah terdaftar ',
         'tahun.integer' => 'Tahun motor harus berupa angka.',
         'warna.required' => 'Warna Harus Dipilih',
         'tahun.digits' => 'Tahun motor harus terdiri dari 4 digit.',

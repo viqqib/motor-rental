@@ -7,7 +7,7 @@ use App\Models\HomepageContent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class HomepageSettingsController extends Controller
+class ContentHomepageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class HomepageSettingsController extends Controller
     public function index()
     {
         $heroContent = HomepageContent::where('section', 'hero')->first();
-        return view('admin.homepageContent.index', compact('heroContent'));
+        return view('admin.content.homepage.index', compact('heroContent'));
     }
 
     /**
@@ -47,7 +47,7 @@ class HomepageSettingsController extends Controller
      */
     public function edit(string $id)
     {
-        return view('admin.homepageContent.edit');
+        return view('admin.content.homepage.edit');
     }
 
     /**
@@ -56,12 +56,30 @@ class HomepageSettingsController extends Controller
     public function update(Request $request)
     {
         // Validate the form data
-        $validated = $request->validate([
-            'heading' => 'required|string|max:255',
-            'tag' => 'required|string|max:255',
-            'content' => 'required|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
+        $validated = $request->validate(
+            [
+                'heading' => 'required|string|max:50',
+                'tag' => 'required|string|max:255',
+                'content' => 'required|string',
+                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ],
+            [
+                'heading.required' => 'Judul wajib diisi.',
+                'heading.string' => 'Judul harus berupa teks.',
+                'heading.max' => 'Judul tidak boleh lebih dari 50 karakter.',
+                
+                'tag.required' => 'Tag wajib diisi.',
+                'tag.string' => 'Tag harus berupa teks.',
+                'tag.max' => 'Tag tidak boleh lebih dari 255 karakter.',
+                
+                'content.required' => 'Konten wajib diisi.',
+                'content.string' => 'Konten harus berupa teks.',
+                
+                'image.image' => 'Gambar harus berupa file gambar.',
+                'image.mimes' => 'Gambar harus memiliki format: jpeg, png, jpg, gif, svg.',
+                'image.max' => 'Ukuran gambar tidak boleh lebih dari 2048 kilobyte.',
+            ]
+        );
 
         // Find the hero content (assumes only one record with section 'hero')
         $heroContent = HomepageContent::where('section', 'hero')->first();
@@ -93,7 +111,7 @@ class HomepageSettingsController extends Controller
         $heroContent->save();
 
         // Redirect back with success message
-        return redirect()->route('admin.homepageContent.index')->with('success', 'Hero section updated successfully!');
+        return redirect()->route('admin.content.homepage.index')->with('success', 'Halaman utama berhasil di-update!');
     }
 
     /**

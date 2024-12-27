@@ -19,9 +19,20 @@
         </div>
 
         <div class="sosmed gap-x-2 flex text-2xl">
-            <i class="fab fa-facebook"></i>
-            <i class="fab fa-instagram"></i>
-            <i class="fab fa-whatsapp"></i>
+            {{-- <a href="{{ $facebook->link }}">
+                <i class="fab fa-facebook"></i>
+            </a>
+            <a href="{{ $facebook->link }}">
+                <i class="fab fa-instagram"></i>
+            </a> --}}
+            @foreach ($socialLinks as $socialLink)
+            @if ($socialLink->link) <!-- Check if there is a valid link -->
+                <a href="{{ $socialLink->link }}" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-{{ strtolower($socialLink->name) }}"></i>
+                </a>
+            @endif
+        @endforeach
+        
         </div>
     </div>
 

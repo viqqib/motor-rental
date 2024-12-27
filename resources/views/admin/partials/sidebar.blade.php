@@ -38,19 +38,49 @@
 
         <div class="h-[1px] bg-gray-300 w-full my-2"></div>
 
-        <a href="{{ url('/admin/homepageContent') }}">
-            <div class="p-2.5 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-gray-800 text-white {{ Request::is('admin/homepageContent') ? 'active' : '' }}">
-                <div class="flex justify-center items-center h-6 w-6">
-                    <i class="fa-solid fa-money-bill-wave text-base"></i>
-                </div>
-                <h1 class="ml-4 text-[1rem]">Konten</h1>
+
+
+        <div class="p-2.5 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-gray-800 {{ Request::is('admin/content*') ? 'active' : '' }}" onclick="dropdown()">
+            <div class="flex justify-center items-center h-6 w-6">
+                <i class="fa-solid fa-money-bill-wave text-base"></i>
             </div>
-        </a>
+            <span class="ml-4 text-[1rem]">Konten</span>
+            <span class="text-sm rotate-180 ml-32" id="arrow">
+                <i class="fa-solid fa-chevron-down"></i>
+            </span>
+        </div>
+
+       <a href="{{ url('/admin/content/homepage') }}">
+            <div class="text-left text-sm font-thin mt-2 w-4/5 mx-auto" id="submenu">
+                <h1 class="cursor-pointer py-2 px-3 hover:bg-gray-800 rounded-md">Halaman Utama</h1>
+            </div>
+       </a>
+
+       {{-- settings --}}
+       
+       <a href="{{ url('/admin/settings') }}">
+        <div class="p-2.5 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-gray-800 text-white {{ Request::is('admin/motorHarga') ? 'active' : '' }}">
+            <div class="flex justify-center items-center h-6 w-6">
+                <i class="fa-solid fa-gear text-base"></i>
+            </div>
+            <h1 class="ml-4 text-[1rem]">Pengaturan</h1>
+        </div>
+    </a>
+
+
 
 
 
     </div>
 </div>
+
+<script>
+    function dropdown(){
+        document.querySelector('#submenu').classList.toggle('hidden');
+        document.querySelector('#arrow').classList.toggle('rotate-0');
+    }
+    dropdown()
+</script>
 
 <style>
     .active {

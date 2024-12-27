@@ -34,9 +34,11 @@
                                 <div class="bg-[rgba(18,18,18,0.8)] text-xs md:text-base px-3 md:px-5 py-2 w-auto inline-flex items-center gap-2 rounded-md border">
                                     <div class="w-[6px] h-[6px] bg-green-500 rounded-full"></div>{{ $availableCount }} Motor Tersedia
                                 </div>
-                                <button class="bg-[#FF9000] md:mr-0 mr-10 text-xs md:text-base font-bold px-3 md:px-5 py-2 rounded-md border md:mt-0 mt-3">
-                                    Cek & Rental Sekarang
-                                </button>
+                                <a href="{{ route('motor.index') }}">
+                                    <button class="bg-[#FF9000] md:mr-0 mr-10 text-xs md:text-base font-bold px-3 md:px-5 py-2 rounded-md border md:mt-0 mt-3">
+                                        Cek & Rental Sekarang
+                                    </button>
+                                </a>
                             </div>
                         </div>
                         </div>
