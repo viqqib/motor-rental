@@ -21,7 +21,7 @@
 
     <!-- Footer -->
     @include('frontend.partials.footer')
-
     @vite('resources/js/app.js') <!-- Load JavaScript -->
+    
 </body>
 </html>
