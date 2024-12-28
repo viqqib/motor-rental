@@ -22,6 +22,6 @@
     <!-- Footer -->
     @include('frontend.partials.footer')
 
-    <script src="{{ mix('js/app.js') }}"></script> <!-- Your compiled JavaScript -->
+    @vite('resources/js/app.js') <!-- Load JavaScript -->
 </body>
 </html>

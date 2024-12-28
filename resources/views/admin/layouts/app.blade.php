@@ -38,6 +38,6 @@
     <!-- Footer -->
     @include('admin.partials.footer')
 
-    <script src="{{ mix('js/app.js') }}"></script> <!-- Your compiled JavaScript -->
+    @vite('resources/js/app.js') <!-- Load JavaScript --><!-- Your compiled JavaScript -->
 </body>
 </html>
