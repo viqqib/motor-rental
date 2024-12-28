@@ -13,7 +13,7 @@
     "outputDirectory": "public",
     "env": {
         "APP_ENV": "production",
-        "APP_DEBUG": "false",
+        "APP_DEBUG": "true",
         "APP_URL": "https://threej-rental.vercel.app",
         "APP_KEY": "base64:FsGTN//o+c8A36dP2yYRlmuNlXgP5Iz9nHDi7ISVILw=",
         "APP_CONFIG_CACHE": "/tmp/config.php",
