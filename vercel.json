@@ -29,6 +29,7 @@
         "DB_HOST": "ieuuk.h.filess.io",
         "DB_PORT": "3307",
         "DB_DATABASE": "rental99_practical",
-        "DB_USERNAME": "rental99_practical"
+        "DB_USERNAME": "rental99_practical",
+        "DB_PASSWORD": "048cd340212a6d8fd31f2670db52131689ac0659"
     }
 }
