@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Motor;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -14,8 +15,10 @@ class AdminController extends Controller
     public function index()
     {
         // Admin dashboard logic
-        
-        return view('admin.dashboard');
+        $availableMotors = Motor::where('status', 'tersedia')->get();
+        $rentedMotors = Motor::where('status', 'tidak tersedia')->get();
+        $maintenancedMotors = Motor::where('status', 'perawatan')->get();
+        return view('admin.dashboard', compact('availableMotors', 'rentedMotors', 'maintenancedMotors'));
     }
 
     /**

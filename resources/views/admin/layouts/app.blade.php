@@ -19,8 +19,9 @@
     @endif
 
     <!-- Main Content -->
-    <main class=" pb-10 min-h-screen ml-[300px]">
+    <main class=" pb-10 min-h-screen mt-28">
         @if (Auth::check())
+            <main class=" pb-10 min-h-screen md:ml-[300px] mt-28">
             @include('admin.partials.navbar')
         @endif
         <div class="md:pl-10 md:pr-12 px-4 mt-5">

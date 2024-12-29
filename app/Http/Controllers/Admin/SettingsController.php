@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\SocialLink;
+use App\Models\WebsiteInfo;
 use Illuminate\Http\Request;
 
 class SettingsController extends Controller
@@ -13,8 +14,9 @@ class SettingsController extends Controller
      */
     public function index()
     {   
+        $websiteInfo = WebsiteInfo::where('id', 1 )->first();
         $socialLinks = SocialLink::all();
-        return view('admin.settings.index', compact('socialLinks'));
+        return view('admin.settings.index', compact('socialLinks', 'websiteInfo'));
     }
 
 

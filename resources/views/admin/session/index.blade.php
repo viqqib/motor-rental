@@ -4,7 +4,7 @@
 
 @section('content')
 
-<div class="mt-28 flex items-center justify-center bg-gray-100">
+<div class=" flex justify-center">
     <div class="w-full max-w-sm bg-white shadow-md rounded-lg p-6">
         <h2 class="text-2xl font-bold text-center text-gray-700 mb-4">Login</h2>
         <form action="/admin/session/login" method="POST" class="space-y-4">

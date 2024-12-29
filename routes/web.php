@@ -8,12 +8,14 @@ use App\Http\Controllers\Admin\MotorsHargaController;
 use App\Http\Controllers\Admin\SessionController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\SettingsSocialLinksController;
+use App\Http\Controllers\Admin\WebsiteInfoController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 use App\Http\Controllers\MotorController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\isLogged;
+use App\Models\WebsiteInfo;
 
 // Sample Header Links
 View::composer('frontend.partials.navbar', function ($view) {
@@ -57,6 +59,7 @@ Route::prefix('admin/settings')
     ->group(function () {
         Route::resource('/', SettingsController::class);
         Route::resource('social-link', SettingsSocialLinksController::class);
+        Route::resource('web-info', WebsiteInfoController::class);
     });
 
 
