@@ -3,39 +3,61 @@
 @section('title', 'Motor Details')
 
 @section('content')
-    <div class="md:px-32 px-5 mt-5 ">
-        <div class="bg-white px-5 py-5 rounded-md flex md:flex-row flex-col">
-            <div class="bike-img">
-                <img 
-                    src="{{ asset('storage/' . $motor->gambar) }}"
-                    alt="{{ $motor->tipe }}" 
-                    class="md:w-[600px] md:h-[450px] w-full h-[260px] rounded-md"
-                />
-            </div>
+<div class="md:px-32 px-5 mt-5 pb-5">
+    <div class="bg-white shadow-md px-5 py-5 rounded-lg flex flex-col md:flex-row items-start gap-6">
+        <!-- Bike Image -->
+        <div class="bike-img">
+            <img 
+                src="{{ asset('storage/' . $motor->gambar) }}" 
+                alt="{{ $motor->tipe }}" 
+                class="md:w-[600px] md:h-[450px] w-full h-[260px] rounded-lg object-cover"
+            />
+        </div>
 
-            <div class="bike-desc mt-4 md:ml-4 md:mt-0">
-                <h1 class="text-xl font-bold md:text-3xl">{{ $motor->merek }} {{ $motor->tipe }}</h1>
+        <!-- Bike Description -->
+        <div class="bike-desc flex-1 w-full">
+            <!-- Bike Title -->
+            <h1 class="text-xl md:text-3xl font-bold flex items-center gap-2">
+                <i class="fas fa-motorcycle text-logo"></i> 
+                {{ $motor->merek }} {{ $motor->tipe }}
+            </h1>
 
-                <table class="mt-2 w-full text-left">
-                    <tbody>
-                        <!-- Motor details here -->
-                    </tbody>
-                </table>
+            <!-- Description Table -->
+            <table class="mt-4 w-full text-left text-gray-600">
+                <tbody>
+                    <tr>
+                        <td class="py-2"><i class="fas fa-calendar-alt text-logo"></i> Tahun:</td>
+                        <td class="py-2 font-medium">{{ $motor->tahun }}</td>
+                    </tr>
+                    <tr>
+                        <td class="py-2"><i class="fas fa-palette text-logo"></i> Warna:</td>
+                        <td class="py-2 font-medium">{{ $motor->warna }}</td>
+                    </tr>
+                    <tr>
+                        <td class="py-2"><i class="fas fa-cogs text-logo"></i> Transmisi:</td>
+                        <td class="py-2 font-medium">{{ $motor->motorSpesifikasi->transmisi ?? 'N/A' }}</td>
+                    </tr>
+                </tbody>
+            </table>
 
-                <p class="mt-2">{{ $motor->deskripsi }}</p>
+            <!-- Description Text -->
+            <p class="mt-4 text-gray-800">{{ $motor->deskripsi }}</p>
 
-                <h1 class="text-logo text-3xl font-bold mt-3">
-                    Rp. 
-                    @if ($motor->motorHarga)
-                        {{ number_format($motor->motorHarga->harga_12_jam, 0, ',', '.') }}
-                    @else
-                        Harga Belum Tersedia
-                    @endif
-                </h1>
-                
-                <div class="mb-4">
-                    <label for="rental-duration" class="block text-gray-700 font-bold mb-2">Pilih Durasi Sewa:</label>
-                    <select name="rental-duration" id="rental-duration" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            <!-- Price -->
+            <h1 class="text-logo text-3xl font-bold mt-4">
+                Rp. 
+                @if ($motor->motorHarga)
+                    {{ number_format($motor->motorHarga->harga_12_jam, 0, ',', '.')  }} / 12 Jam
+                @else
+                    Harga Belum Tersedia
+                @endif
+            </h1>
+
+            <!-- Rental Duration -->
+            <div class="mt-5">
+                <label for="rental-duration" class="block text-gray-700 font-bold mb-2">Pilih Durasi Sewa:</label>
+                <div class="relative">
+                    <select name="rental-duration" id="rental-duration" class="shadow border rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-logo">
                         @if ($motor->motorHarga)
                             <option value="harga_12_jam" data-price="{{ $motor->motorHarga->harga_12_jam }}" {{ old('rental-duration') == 'harga_12_jam' ? 'selected' : '' }}>
                                 12 Jam
@@ -50,46 +72,51 @@
                                 1 Bulanan
                             </option>
                         @else
-                            <!-- If harga is null, show a prompt to add price -->
-                            <option disabled selected>Harga Belum Tersedia <a href="{{ url('admin/motorHarga') }}"></a></option>
+                            <option disabled selected>Harga Belum Tersedia</option>
                         @endif
                     </select>
+                    <i class="fas fa-chevron-down absolute right-3 top-3 text-gray-400"></i>
                 </div>
-
-                <!-- Dynamic input for 24 Jam, 1 Minggu, and 1 Bulan -->
-                <div id="days-input" class="mb-4 hidden">
-                    <label for="rental-days" class="block text-gray-700 font-bold mb-2">Pilih Jumlah Hari (1-7):</label>
-                    <input type="number" id="rental-days" name="rental-days" min="1" max="7" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                </div>
-
-                <div id="weeks-input" class="mb-4 hidden">
-                    <label for="rental-weeks" class="block text-gray-700 font-bold mb-2">Pilih Jumlah Minggu (1-4):</label>
-                    <input type="number" id="rental-weeks" name="rental-weeks" min="1" max="4" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                </div>
-
-                <div id="months-input" class="mb-4 hidden">
-                    <label for="rental-months" class="block text-gray-700 font-bold mb-2">Pilih Jumlah Bulan (1-3):</label>
-                    <input type="number" id="rental-months" name="rental-months" min="1" max="3" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                </div>
-
-                <p>Harga: 
-                    @if ($motor->motorHarga && $motor->motorHarga->harga_12_jam)
-                        Rp <span id="price-display">{{ number_format($motor->motorHarga->harga_12_jam, 0, ',', '.') }}</span>
-                    @else
-                        Harga Tidak Tersedia
-                    @endif
-                </p>
-
-                <a href="#" id="rental-now" target="_blank">
-                    <button class="w-full {{ $motor->status === 'tersedia' ? 'bg-logo' : 'bg-gray-400 cursor-not-allowed' }} text-white font-bold rounded-md py-3 text-lg mt-5"
-                        {{ $motor->status !== 'tersedia' ? 'disabled' : '' }}>
-                        {{ $motor->status === 'tersedia' ? 'Rental Sekarang' : 'Tidak Tersedia' }}
-                    </button>
-                </a>
-
             </div>
+
+            <!-- Dynamic Inputs -->
+            <div id="days-input" class="mt-4 hidden">
+                <label for="rental-days" class="block text-gray-700 font-bold mb-2">Pilih Jumlah Hari (1-7):</label>
+                <input type="number" id="rental-days" name="rental-days" min="1" max="7" class="shadow border rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-logo">
+            </div>
+
+            <div id="weeks-input" class="mt-4 hidden">
+                <label for="rental-weeks" class="block text-gray-700 font-bold mb-2">Pilih Jumlah Minggu (1-4):</label>
+                <input type="number" id="rental-weeks" name="rental-weeks" min="1" max="4" class="shadow border rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-logo">
+            </div>
+
+            <div id="months-input" class="mt-4 hidden">
+                <label for="rental-months" class="block text-gray-700 font-bold mb-2">Pilih Jumlah Bulan (1-3):</label>
+                <input type="number" id="rental-months" name="rental-months" min="1" max="3" class="shadow border rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-logo">
+            </div>
+
+            <!-- Price Display -->
+            <p class="mt-4 text-gray-800 font-medium">
+                Total : 
+                @if ($motor->motorHarga && $motor->motorHarga->harga_12_jam)
+                    Rp <span id="price-display">{{ number_format($motor->motorHarga->harga_12_jam, 0, ',', '.') }}</span>
+                @else
+                    Harga Tidak Tersedia
+                @endif
+            </p>
+
+            <!-- Rental Button -->
+            <a href="#" id="rental-now" target="_blank" class="mt-5 block">
+                <button class="w-full {{ $motor->status === 'tersedia' ? 'bg-logo hover:bg-primary' : 'bg-gray-400 cursor-not-allowed' }} text-white font-bold rounded-md py-3 text-lg transition-all duration-300"
+                        {{ $motor->status !== 'tersedia' ? 'disabled' : '' }}>
+                    <i class="fas fa-shopping-cart"></i> 
+                    {{ $motor->status === 'tersedia' ? 'Rental Sekarang' : 'Tidak Tersedia' }}
+                </button>
+            </a>
         </div>
     </div>
+</div>
+
 
     <script>
     var whatsappNumber = @json($whatsappNumber->identifier);

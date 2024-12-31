@@ -32,10 +32,11 @@ class SettingsSocialLinksController extends Controller
 {
     // Validate the request data
     $validated = $request->validate([
-        'name' => 'required|string|max:255',
+        'name' => 'required|string|max:255|unique:social_links',
         'identifier' => 'required|string|max:255',
         'link' => 'required|url',
     ], [
+        'name.unique' => 'Sosial Media ini sudah ada',
         'name.required' => 'Nama wajib diisi.',
         'name.string' => 'Nama harus berupa teks.',
         'name.max' => 'Nama tidak boleh lebih dari 255 karakter.',
@@ -89,6 +90,7 @@ class SettingsSocialLinksController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'identifier' => 'required|string|max:255',
+            'link' => 'required|string|max:255',
         ], [
             'name.required' => 'Nama wajib diisi.',
             'name.string' => 'Nama harus berupa teks.',
@@ -96,12 +98,16 @@ class SettingsSocialLinksController extends Controller
             'identifier.required' => 'Alamat (Username / Nomor Telepon) wajib diisi.',
             'identifier.string' => 'Alamat (Username / Nomor Telepon) harus berupa teks.',
             'identifier.max' => 'Alamat (Username / Nomor Telepon) tidak boleh lebih dari 255 karakter.',
+            'link.required' => 'Link wajib diisi.',
+            'link.string' => 'Link harus berupa teks.',
+            'link.max' => 'Link tidak boleh lebih dari 255 karakter.',
         ]);
     
         // Update the social link with validated data
         $socialLink->update([
             'name' => $validated['name'],
             'identifier' => $validated['identifier'],
+            'link' => $validated['link'],
         ]);
     
         // Redirect back with a success message

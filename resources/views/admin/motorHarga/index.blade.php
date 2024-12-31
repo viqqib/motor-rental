@@ -21,6 +21,7 @@
                 <i class="fas fa-search"></i>
             </button>
         </form>
+
     </div>
 
     <!-- Data Table -->
@@ -33,7 +34,7 @@
                 <th class="px-4 py-3">Harga/24 Jam</th>
                 <th class="px-4 py-3">Harga/1 Minggu</th>
                 <th class="px-4 py-3">Harga/1 Bulan</th>
-                <th class="px-4 py-3">Actions</th>
+                <th class="px-4 py-3">Aksi</th>
             </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">

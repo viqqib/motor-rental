@@ -1,41 +1,63 @@
-<div class="text-white bg-footer px-4 md:px-32 max-w-full hero py-5">
-    <div class="top flex w-full justify-between items-center">
-        <div class="logo text-lg md:text-3xl font-semibold">Tentang Kami</div>
-        <div class="link md:text-base text-sm flex gap-5">
-            <a href="#">Blog</a>
-            <a href="#">Blog</a>
-            <a href="#">Blog</a>
-            <a href="#">Blog</a>
+<div class="text-white bg-footer px-6 md:px-32 py-8 max-w-full">
+    <!-- Top Section -->
+    <div class="flex flex-col md:flex-row justify-between gap-10">
+        <!-- About Us -->
+        <div class="about flex-1">
+            <h2 class="text-2xl md:text-3xl font-semibold mb-4">Tentang Kami</h2>
+            <p class="text-sm md:text-base leading-relaxed">
+                {{ $websiteInfo->description }}
+            </p>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="contact flex-1">
+            <h2 class="text-2xl md:text-3xl font-semibold mb-4">Hubungi Kami</h2>
+            <ul class="text-sm md:text-base space-y-2">
+                <li class="flex items-center gap-2">
+                    <i class="fa fa-phone text-white"></i>
+                    <span>{{ $websiteInfo->phone_number }}</span>
+                </li>
+                <li class="flex items-center gap-2">
+                    <i class="fa fa-envelope text-white"></i>
+                    <span>{{ $websiteInfo->email }}</span>
+                </li>
+                <li class="flex items-center gap-2">
+                    <i class="fa fa-map-marker text-white"></i>
+                    <span>{{ $websiteInfo->address }}</span>
+                </li>
+               
+            
+            </ul>
+            
+        </div>
+
+        <!-- Quick Links -->
+        <div class="links flex-1">
+            <h2 class="text-2xl md:text-3xl font-semibold mb-4">Quick Links</h2>
+            <ul class="flex flex-col gap-2">
+                <li><a href="#" class="hover:underline text-sm md:text-base">Blog</a></li>
+                <li><a href="#" class="hover:underline text-sm md:text-base">FAQ</a></li>
+                <li><a href="#" class="hover:underline text-sm md:text-base">Privacy Policy</a></li>
+                <li><a href="#" class="hover:underline text-sm md:text-base">Terms of Service</a></li>
+            </ul>
         </div>
     </div>
 
-    <div class="center flex w-full justify-between mt-4">
-        <div>
-            <p class="md:w-[700px] w-52 leading-5 text-xs md:text-base">{{ $websiteInfo->description }}</p>
-            <div class="location md:flex gap-x-2 mt-7 justify-center items-center hidden">
-                <i class="fa fa-map-marker text-white hover:text-red-800 text-xl"></i>
-                <p class="md:text-base text-xs">{{ $websiteInfo->address }}</p>
-            </div>
-        </div>
-
-        <div class="sosmed gap-x-2 flex text-2xl">
-            {{-- <a href="{{ $facebook->link }}">
-                <i class="fab fa-facebook"></i>
+    <!-- Social Media Section -->
+    <div class="social-media flex justify-center md:justify-center gap-x-4 mt-8 text-2xl">
+        @foreach ($socialLinks as $socialLink)
+        @if ($socialLink->link) <!-- Check if there is a valid link -->
+            <a href="{{$socialLink->link}}" target="_blank" rel="noopener noreferrer" class="hover:text-orange-500">
+                <i class="fab fa-{{ strtolower($socialLink->name) }}"></i>
             </a>
-            <a href="{{ $facebook->link }}">
-                <i class="fab fa-instagram"></i>
-            </a> --}}
-            @foreach ($socialLinks as $socialLink)
-            @if ($socialLink->link) <!-- Check if there is a valid link -->
-                <a href="{{ $socialLink->link.$socialLink->identifier }}" target="_blank" rel="noopener noreferrer">
-                    <i class="fab fa-{{ strtolower($socialLink->name) }}"></i>
-                </a>
-            @endif
+        @endif
         @endforeach
-        
-        </div>
     </div>
+    <!-- Divider -->
+    <div class="line w-full border-t-2 border-white my-6"></div>
 
-    <div class="line w-full border-t-2 my-4"></div>
-    <p class="self-center md:text-base">2024 Copyright Fiqqidev</p>
+    <!-- Bottom Section -->
+    <div class="bottom text-center">
+        <p class="text-sm md:text-base">2024 Copyright Fiqqidev. All Rights Reserved.</p>
+    </div>
 </div>

@@ -9,6 +9,14 @@
     <h2 class="text-2xl font-semibold mb-4">Edit Alamat Sosial Media</h2>
 
     <!-- Form to edit the social link -->
+    @if ($errors->any())
+    <div class="p-3 text-red-900 rounded-md h-full bg-red-200 border-gray-400 w-full">
+        @foreach ($errors->all() as $item)
+            <p>{{ $item }}</p>
+        @endforeach
+    </div>
+    @endif
+    
     <form action="{{ route('admin.settings.social-link.store') }}" method="POST" class="bg-white p-6 shadow-md rounded-lg">
         @csrf
 

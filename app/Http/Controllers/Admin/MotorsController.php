@@ -7,6 +7,7 @@ use Illuminate\Auth\Events\Validated;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class MotorsController extends Controller
 {
@@ -15,19 +16,71 @@ class MotorsController extends Controller
      */
     public function index(Request $request)
     {
-        $query = $request->query('query'); // Use 'search' as a query parameter (or change it based on your front-end)
-        
-        if (strlen($query)) {
-            $motors = Motor::where('tipe', 'like', "%$query%")
-                ->orWhere('merek', 'like', "%$query%")
-                ->orWhere('tahun', 'like', "%$query%")
-                ->paginate(2);
-        } else {
-            $motors = Motor::with('motorHarga')->paginate(10);
+        $query = $request->query('query');
+        $sortOrder = $request->query('sort', 'desc'); // Default to 'desc'
+        $status = $request->query('status'); // Get the status filter
+    
+        // Motors without price
+        $motorsWithoutPrice = Motor::whereDoesntHave('motorHarga')->get();
+    
+        // Main motors query
+        $motorsQuery = Motor::query();
+    
+        // Filter by search query
+        if ($query) {
+            $motorsQuery->where(function ($q) use ($query) {
+                $q->where('tipe', 'like', "%$query%")
+                    ->orWhere('merek', 'like', "%$query%")
+                    ->orWhere('tahun', 'like', "%$query%");
+            });
         }
     
-        return view('admin.motor.index', compact('motors'));
+        // Filter by status
+        if ($status) {
+            $motorsQuery->where('status', $status);
+        }
+    
+        // Apply sorting
+        if ($sortOrder === 'newest') {
+            $motorsQuery->orderBy('created_at', 'desc');
+        } elseif ($sortOrder === 'oldest') {
+            $motorsQuery->orderBy('created_at', 'asc');
+        } elseif (in_array($sortOrder, ['asc', 'desc'])) {
+            $motorsQuery->orderBy('tipe', $sortOrder);
+        }
+    
+        $motors = $motorsQuery
+            ->with('motorHarga')
+            ->paginate(10);
+    
+        return view('admin.motor.index', compact('motors', 'motorsWithoutPrice'));
     }
+    
+
+
+
+    public function cropImageUploadAjax(Request $request)
+    {
+        $folderPath = public_path('upload/');
+ 
+        $image_parts = explode(";base64,", $request->image);
+        $image_type_aux = explode("image/", $image_parts[0]);
+        $image_type = $image_type_aux[1];
+        $image_base64 = base64_decode($image_parts[1]);
+ 
+        $imageName = uniqid() . '.png';
+ 
+        $imageFullPath = $folderPath.$imageName;
+ 
+        file_put_contents($imageFullPath, $image_base64);
+ 
+         $saveFile = new Motor;
+         $saveFile->name = $imageName;
+         $saveFile->save();
+    
+        return response()->json(['success'=>'Crop Image Uploaded Successfully']);
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -56,7 +109,7 @@ class MotorsController extends Controller
             'nomor_plat' => 'required|unique:motors|max:10',
             'merek' => 'required|string|max:255',
             'tahun' => 'required|integer|digits:4|min:1900|max:' . date('Y'),
-            'warna' => 'required|in:Hitam,Putih,Merah,Biru,Hijau,Kuning,Silver',
+            'warna' => 'required',
             'status' => 'required|in:tersedia,tidak tersedia,perawatan',
             'gambar' => 'required|mimes:png,jpg,jpeg|max:2048',
         ], [
@@ -81,7 +134,20 @@ class MotorsController extends Controller
         if ($request->hasFile('gambar')) {
             $gambar = $request->file('gambar');
             $filename = date('Y-m-d') . '_' . $gambar->getClientOriginalName();
-            $path = $gambar->storeAs('photo-motor', $filename, 'public');
+        
+            // Compress and resize the image
+            $image = Image::make($gambar)
+                ->resize(800, 600, function ($constraint) {
+                    $constraint->aspectRatio(); // Maintain aspect ratio
+                    $constraint->upsize(); // Prevent upscale
+                })
+                ->encode('jpg', 70); // Compress to 75% quality
+        
+            // Save the compressed image
+            $path = 'photo-motor/' . $filename;
+            Storage::disk('public')->put($path, $image);
+        
+            // Optional: Return or store the path
         }
     
         // Create a new motor entry
@@ -149,18 +215,31 @@ class MotorsController extends Controller
     // Find the motor entry to be updated
     $motor = Motor::findOrFail($id);
 
-    // Handle the image upload if a new image is provided
     if ($request->hasFile('gambar')) {
         // Delete the old image from storage
         if ($motor->gambar) {
             Storage::disk('public')->delete('photo-motor/' . $motor->gambar);
         }
-        
-        // Upload the new image
+
+        // Upload the new image (this will be cropped by the front-end)
         $gambar = $request->file('gambar');
         $filename = date('Y-m-d') . '_' . $gambar->getClientOriginalName();
-        $path = $gambar->storeAs('photo-motor', $filename, 'public');
-    }
+
+        // Compress and resize the image after cropping
+        $image = Image::make($gambar)
+            ->resize(800, 600, function ($constraint) {
+                $constraint->aspectRatio(); // Maintain aspect ratio
+                $constraint->upsize(); // Prevent upscale
+            })
+            ->encode('jpg', 75); // Compress to 75% quality
+
+        // Save the compressed image
+        $path = 'photo-motor/' . $filename;
+        Storage::disk('public')->put($path, $image);
+        } else {
+            // If no image is uploaded, keep the existing image path
+            $path = $motor->gambar;
+        }
 
     // Update the motor entry
     $motor->update([

@@ -5,9 +5,16 @@
 @section('content')
     @include('frontend.home_hero')
     @include('frontend.home_motor')
-
-    <div class="container mx-auto py-10">
-        <h1 class="text-3xl font-bold">Welcome to Three J Rental Motor!</h1>
-        <p class="font-serif">Explore our motorbike rental services and enjoy your trip.</p>
+    <div class="bg-white p-5">
+        @include('frontend.home_rental')
     </div>
+    <div class="p-5 mt-5">
+        @include('frontend.home_whyus')
+    </div>
+
+    
+
+    
+ 
+    
 @endsection

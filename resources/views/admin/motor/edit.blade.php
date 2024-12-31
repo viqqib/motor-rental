@@ -34,7 +34,7 @@
                         </td>
                     </tr>
                     <tr class="border-b bg-gray-50">
-                        <th class="px-4 py-2 font-medium text-gray-900">Tipe</th>
+                        <th class="px-4 py-2 font-medium text-gray-900">Nama</th>
                         <td class="px-4 py-2">
                             <input type="text" name="tipe" id="tipe" 
                                    value="{{ old('tipe', $data->tipe) }}" 

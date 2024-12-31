@@ -35,11 +35,12 @@ class MotorsHargaController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
         $motors = Motor::whereDoesntHave('motorHarga')->get();
+        $selectedMotorId = $request->query('motor_id'); // Get the motor_id from the query string
 
-        return view('admin.motorHarga.create', compact('motors'));
+        return view('admin.motorHarga.create', compact('motors', 'selectedMotorId'));
     }
 
     /**

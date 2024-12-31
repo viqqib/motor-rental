@@ -4,6 +4,9 @@
 
 @section('content')
 
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.js" integrity="sha512-JyCZjCOZoyeQZSd5+YEAcFgz2fowJ1F1hyJOXgtKu4llIa0KneLcidn5bwfutiehUTiOuK87A986BZJMko0eWQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 <div class="w-full border border-gray-200 bg-white rounded-lg shadow-md p-3">
     <a href="{{ url('admin/motor/') }}" 
        class="inline-block px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700">
@@ -18,6 +21,7 @@
     </div>
     @endif
 
+    
     <form action="{{ url('admin/motor') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <table class="w-full text-sm text-left text-gray-700 border-collapse">
@@ -31,7 +35,7 @@
                     </td>
                 </tr>
                 <tr class="border-b bg-gray-50">
-                    <th class="px-4 py-2 font-medium text-gray-900">Tipe</th>
+                    <th class="px-4 py-2 font-medium text-gray-900">Nama</th>
                     <td class="px-4 py-2">
                         <input type="text" name="tipe" id="tipe" 
                                value="{{ old('tipe') }}" 
@@ -48,7 +52,6 @@
                             <option value="Yamaha" {{ old('merek') == 'Yamaha' ? 'selected' : '' }}>Yamaha</option>
                             <option value="Kawasaki" {{ old('merek') == 'Kawasaki' ? 'selected' : '' }}>Kawasaki</option>
                             <option value="Ducati" {{ old('merek') == 'Ducati' ? 'selected' : '' }}>Ducati</option>
-                            <option value="BMW" {{ old('merek') == 'BMW' ? 'selected' : '' }}>BMW</option>
                             <option value="Lainnya" {{ old('merek') == 'Lainnya' ? 'selected' : '' }}>Lainnya</option>
                         </select>
                     </td>
@@ -107,6 +110,8 @@
                     <th class="px-4 py-2 font-medium text-gray-900">Upload Gambar</th>
                     <td class="px-4 py-2">
                         <input type="file" name="gambar" id="gambar" class="block w-full p-2 border border-gray-300 rounded-md">
+                        <img id="preview" style="max-width: 100%; display: none;" />
+                        <button id="cropButton" style="display: none;">Crop & Upload</button>
                     </td>
                 </tr>
             </tbody>
@@ -122,3 +127,4 @@
 
 
 @endsection
+

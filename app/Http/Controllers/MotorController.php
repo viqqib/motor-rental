@@ -6,20 +6,41 @@ namespace App\Http\Controllers;
 use App\Models\Motor;
 use App\Models\SocialLink;
 use App\Models\WebsiteInfo;
+use Illuminate\Http\Request;
 
 class MotorController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        // Fetch all motors from the database
-        // $motors = Motor::all();
-        $motors = Motor::where('status', 'tersedia')->get();
+        $search = $request->input('search');
+        $filter = $request->input('filter');
+    
+        // Apply search and filter conditions
+        $motors = Motor::where('status', 'tersedia')
+                       ->when($search, function ($query, $search) {
+                           return $query->where('tipe', 'like', "%$search%")
+                                        ->orWhere('merek', 'like', "%$search%");
+                       })
+                       ->when($filter, function ($query, $filter) {
+                           if ($filter == 'available') {
+                               return $query->where('status', 'tersedia');
+                           } elseif ($filter == 'rented') {
+                               return $query->where('status', 'tidak tersedia');
+                           }
+                       })
+                       ->get();
+    
+        // Handle no results case
+        $message = $motors->isEmpty() ? 'Motor tidak ditemukan' : null;
+    
         $rented_motors = Motor::where('status', 'tidak tersedia')->get();
         $socialLinks = SocialLink::all();
-        $websiteInfo = WebsiteInfo::where('id', 1 )->first();
-        // Return the data to the view
-        return view('frontend.motor.index', compact('motors', 'rented_motors','socialLinks','websiteInfo'));
+        $websiteInfo = WebsiteInfo::where('id', 1)->first();
+    
+        return view('frontend.motor.index', compact('motors', 'rented_motors', 'socialLinks', 'websiteInfo', 'message'));
     }
+    
+
 
     // app/Http/Controllers/MotorController.php
 

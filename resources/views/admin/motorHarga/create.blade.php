@@ -32,13 +32,15 @@
                                     class="block w-full p-2 border border-gray-300 rounded-md">
                                 <option value="">Pilih Motor</option>
                                 @foreach ($motors as $motor)
-                                    <option value="{{ $motor->id }}" {{ old('id_motor') == $motor->id ? 'selected' : '' }}>
+                                    <option value="{{ $motor->id }}" 
+                                            {{ (old('id_motor') == $motor->id || $motor->id == $selectedMotorId) ? 'selected' : '' }}>
                                         {{ $motor->merek }} - {{ $motor->tipe }} ({{ $motor->tahun }})
                                     </option>
                                 @endforeach
                             </select>
                         </td>
                     </tr>
+                    
                     
                     <!-- Harga Motor -->
                     <tr class="border-b bg-gray-50">
