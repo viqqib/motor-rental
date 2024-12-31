@@ -15,7 +15,7 @@
     <div class="bg-white rounded-md p-5 px-7">
         <div class="bg-white w-full max-w-4xl px-3 border border-gray-200 pt-3 rounded-md pb-3">
             <p class="text-xl font-semibold text-teal-700">Informasi Website</p>
-            <hr class="bg-teal-700 mt-3 mb-6">
+            <hr class="bg-teal-700 mt-3 mb-2">
     
             <table class="w-full">
                 <tbody>
@@ -99,6 +99,8 @@
             </a> --}}
         </div>
     </div>
+
+
     <div class="bg-white rounded-md p-5 px-7">
         <div class="bg-white w-[800px] px-3 border border-gray-200 pt-3 rounded-md pb-3">
             <p class="text-xl font-xl font-semibold text-teal-700">Sosial Media</p>
@@ -145,6 +147,20 @@
             <a href="settings/social-link/create" class="inline-block mt-3">
                 <div class="bg-blue-600 py-2 px-4 text-white rounded-md font-bold">Tambah Akun Sosial Media</div>
             </a>
+        </div>
+    </div>
+
+
+    <div class="bg-white rounded-md p-5 px-7">
+        <div class="bg-white w-[800px] px-3 border border-gray-200 pt-3 rounded-md pb-3">
+            <p class="text-xl font-xl font-semibold text-teal-700">Pengguna</p>
+            <hr class="bg-red-700 mt-3">
+
+            <a href="../admin/session/register" class="inline-block mt-3">
+                <div class="bg-blue-600 py-2 px-4 text-white rounded-md font-bold">Tambah Admin</div>
+            </a>
+    
+            
         </div>
     </div>
     

@@ -15,31 +15,39 @@ class SessionController extends Controller
         return view('admin.session.index');
     }
 
-    function login(Request $request)
-    {
-        Session::flash('email',$request->email);
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required|min:6'
-        ], [
-            'email.required' => 'Email wajib diisi.',
-            'email.email' => 'Format email tidak valid.',
-            'password.required' => 'Password wajib diisi.',
-            'password.min' => 'Password harus terdiri dari minimal 6 karakter.'
-        ]);
-        $infologin =  [
-            'email'=>$request->email,
-            'password'=>$request->password
-        ];
-        if(Auth::attempt($infologin)){
-            //If success
-            return redirect('admin/')->with('success', "Berhasil login");
-        } else {
-            //if fail
-            return redirect('admin/session/')->withErrors('Username dan password tidak ditemukan');
-        }
+    public function login(Request $request)
+{
+    // Flash email to session for persistence
+    Session::flash('email', $request->email);
 
+    // Validate the login credentials
+    $request->validate([
+        'email' => 'required|email',
+        'password' => 'required|min:6',
+    ], [
+        'email.required' => 'Email wajib diisi.',
+        'email.email' => 'Format email tidak valid.',
+        'password.required' => 'Password wajib diisi.',
+        'password.min' => 'Password harus terdiri dari minimal 6 karakter.',
+    ]);
+
+    $credentials = [
+        'email' => $request->email,
+        'password' => $request->password,
+    ];
+
+    // Check if the "remember" checkbox is checked
+    $remember = $request->has('remember');
+
+    if (Auth::attempt($credentials, $remember)) {
+        // Successful login
+        return redirect('admin/')->with('success', "Berhasil login");
+    } else {
+        // Failed login
+        return redirect('admin/session/')->withErrors('Username dan password tidak ditemukan');
     }
+}
+
 
     function logout(){
         Auth::logout();

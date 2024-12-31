@@ -43,7 +43,7 @@
 
 
     <!-- Available Motors -->
-    <div class="w-full mx-auto md:px-0 h-auto flex flex-wrap md:flex-row gap-x-5 justify-center gap-y-4">
+    <div class="w-full mx-auto md:px-0 h-auto flex flex-wrap md:flex-row md:gap-x-5 justify-around md:justify-between gap-y-4">
         @foreach($motors as $motor)
         <div class="py-1 rounded-md px-2 md:px-3 w-[10.5rem] md:w-64 bg-white" style="box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;">
             <div class="text-atas">
@@ -51,7 +51,7 @@
                 <p class="bike-type text-sm md:text-xl -mt-1 font-bold">{{ $motor->tipe }} {{ $motor->tahun }}</p>
             </div>
             <div class="bike-img my-1 md:my-2">
-                <img src="{{ asset('storage/' . $motor->gambar) }}" alt="{{ $motor->tipe }}" class="w-full h-[100px] md:h-[170px] rounded-md">
+                <img src="{{ asset('storage/' . $motor->gambar) }}" alt="{{ $motor->tipe }}" class="w-full h-[110px] md:h-[170px] rounded-md">
             </div>
 
             <div class="bike-price pb-1">
@@ -84,7 +84,7 @@
             <div class="text-atas">
                 <p class="text-gray-500 bike-brand text-xs md:text-base">{{ $motor->merek }}</p>
                 <p class="bike-type text-sm md:text-xl -mt-1 font-bold">{{ $motor->tipe }} {{ $motor->tahun }}</p>
-            </div>
+            </div>  
             <div class="bike-img my-1 md:my-2">
                 <img src="{{ asset('storage/' . $motor->gambar) }}" alt="{{ $motor->tipe }}" class="w-full h-[100px] md:h-[170px] rounded-md">
             </div>

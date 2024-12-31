@@ -1,14 +1,16 @@
 <div class="mx-auto relative w-full" style="height: 700px;">
     <div
-        class="md:h-[500px] h-[650px] relative pb-10"
-        style="
-            background-image: url('{{ asset('images/jepretualang-stN5xuXLde4-unsplash.jpg') }}');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            width: 100%;
-        "
-    >
+    class="md:h-[500px] h-[650px] relative pb-10"
+    style="
+        background-image: url('{{ asset('storage/' . $heroContents->image) }}');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        width: 100%;
+    "
+>
+
+    {{-- <img src="{{ asset('storage/' . $motor->gambar) }}" alt="{{ $motor->tipe }}" class="w-full h-[110px] md:h-[170px] rounded-md"> --}}
         {{-- Overlay --}}
         <div class="absolute inset-0" style="background-color: rgba(46, 48, 0, 0.6);"></div>
 
@@ -25,7 +27,7 @@
                         <p class="font-bold text-[2.4rem] md:text-7xl text-white leading-none">
                             {{ $heroContents->heading }}
                         </p>
-                        <p class="mt-4 md:text-base text-xs">
+                        <p class="mt-4 md:text-base text-xs  shadow-sm">
                             {{ $heroContents->content }}
                         </p>
 
