@@ -3,7 +3,7 @@
 @section('title', 'List of Motors')
 
 @section('content')
-<div class="container mx-auto px-3 lg:px-16 py-8">
+<div class="container mx-auto px-6 lg:px-16 py-8">
     <h2 class="text-xl md:text-2xl font-bold text-gray-800 mb-2">Motor Tersedia</h2>
     
     <!-- Search and Filter Section -->
@@ -43,9 +43,9 @@
 
 
     <!-- Available Motors -->
-    <div class="w-full mx-auto md:px-0 h-auto flex flex-wrap md:flex-row md:gap-x-5 justify-around md:justify-between gap-y-4">
+    <div class="w-full mx-auto md:px-0 h-auto flex flex-wrap md:flex-row md:gap-x-5 justify-between md:justify-between gap-y-4">
         @foreach($motors as $motor)
-        <div class="py-1 rounded-md px-2 md:px-3 w-[10.5rem] md:w-64 bg-white" style="box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;">
+        <div class="py-1 rounded-md px-2 md:px-3 w-[11.3rem] md:w-64 bg-white" style="box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;">
             <div class="text-atas">
                 <p class="text-gray-500 bike-brand text-xs md:text-base">{{ $motor->merek }}</p>
                 <p class="bike-type text-sm md:text-xl -mt-1 font-bold">{{ $motor->tipe }} {{ $motor->tahun }}</p>
