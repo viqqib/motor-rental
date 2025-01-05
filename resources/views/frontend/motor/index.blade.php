@@ -51,7 +51,7 @@
                 <p class="bike-type text-sm md:text-xl -mt-1 font-bold">{{ $motor->tipe }} {{ $motor->tahun }}</p>
             </div>
             <div class="bike-img my-1 md:my-2">
-                <img src="{{ asset('storage/' . $motor->gambar) }}" alt="{{ $motor->tipe }}" class="w-full h-[110px] md:h-[170px] rounded-md">
+                <img src="{{ asset('storage/' . $motor->gambar) }}" alt="{{ $motor->tipe }}" class="w-full h-[110px] md:h-[170px] rounded-md" loading="lazy">
             </div>
 
             <div class="bike-price pb-1">

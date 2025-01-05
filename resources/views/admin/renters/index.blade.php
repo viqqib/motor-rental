@@ -8,12 +8,12 @@
     
     <!-- Search Form -->
     <div class="mb-2 flex w-full space-x-1">
-        <form action="{{ url('admin/motor') }}" method="GET" class="flex w-full items-center rounded-md border border-gray-300 overflow-hidden shadow-sm">
+        <form action="{{ url('admin/renters') }}" method="GET" class="flex w-full items-center rounded-md border border-gray-300 overflow-hidden shadow-sm">
             <input 
                 type="text" 
                 name="query" 
                 id="search" 
-                placeholder="Cari Motor..." 
+                placeholder="Cari Penyewa..." 
                 class="flex-grow py-2 px-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-teal-400"
                 value="{{ Request::get('query') }}"
             >
@@ -23,7 +23,7 @@
         </form>
         
         {{-- Filter --}}
-        <form action="{{ url('admin/motor') }}" method="GET" class=" w- flex justify-center items-center">
+        <form action="{{ url('admin/renters') }}" method="GET" class=" w- flex justify-center items-center">
             <input type="hidden" name="query" value="{{ Request::get('query') }}">
             <div class="relative inline-block">
                 <select
@@ -53,7 +53,7 @@
             
         </form>
         {{-- Status Filter --}}
-        <form action="{{ url('admin/motor') }}" method="GET" class="flex justify-center items-center">
+        {{-- <form action="{{ url('admin/motor') }}" method="GET" class="flex justify-center items-center">
             <input type="hidden" name="query" value="{{ Request::get('query') }}">
             <select 
                 name="status" 
@@ -67,10 +67,10 @@
             <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
                 <i class="fas fa-chevron-down text-gray-500"></i> <!-- FontAwesome chevron icon -->
             </div>
-        </form>
+        </form> --}}
 
         <div class="flex">
-            <a href="{{ url('admin/motor/create') }}" class="bg-teal-600 hover:bg-teal-700 text-white font-medium  justify-center items-center flex px-4 rounded-md">
+            <a href="{{ url('admin/renters/create') }}" class="bg-teal-600 hover:bg-teal-700 text-white font-medium  justify-center items-center flex px-4 rounded-md">
                 Tambah
             </a>
             {{-- <a href="{{ url('admin/motor/create') }}" class="bg-teal-600 hover:bg-teal-700 text-white font-medium py-2 px-5 rounded-md">
@@ -80,78 +80,105 @@
     </div>
 
    
-    @if($motorsWithoutPrice->isNotEmpty())
+    {{-- @if($motorsWithoutPrice->isNotEmpty())
     <div class="bg-red-100 p-3 rounded-md text-red-600 mb-2">
         Terdapat {{ $motorsWithoutPrice->count() }} Motor yang harganya belum diisi. <a href="{{ route('admin.motorHarga.create') }}" class="font-bold text-red-700 underline">Isi harga motor</a>
     </div>
-    @endif
+    @endif --}}
     <!-- Data Table -->
     <table class="min-w-full border-collapse table-auto rounded-lg overflow-hidden shadow">
         <thead>
             <tr class="bg-teal-500 text-white text-sm uppercase">
                 <th class="px-4 py-3">#</th>
-                <th class="px-4 py-3">Gambar</th>
                 <th class="px-4 py-3">Nama</th>
-                <th class="px-4 py-3">Merek</th>
-                <th class="px-4 py-3">Tahun</th>
-                <th class="px-4 py-3">Nomor Polisi</th>
-                <th class="px-4 py-3">Warna</th>
-                <th class="px-4 py-3">Harga/12 Jam</th>
+                <th class="px-4 py-3">Email</th>
+                <th class="px-4 py-3">No Telpon</th>
+                <th class="px-4 py-3">NIK</th>
+                <th class="px-4 py-3">Alamat</th>
                 <th class="px-4 py-3">Status</th>
                 <th class="px-4 py-3">Aksi</th>
             </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
-            @forelse ($motors as $index => $motor)
-            <tr class="hover:bg-gray-100 transition">
+            @forelse ($renters as $index => $renter)
+            <tr class="hover:bg-gray-100 transition text-center">
                 <td class="px-4 py-3 text-center">{{ $index + 1 }}</td>
-                <td><img src="{{ asset('storage/' . $motor->gambar) }}" alt="" class="w-16 h-10"></td>
-                <td class="px-4 py-3">{{ $motor->tipe }}</td>
-                <td class="px-4 py-3">{{ $motor->merek }}</td>
-                <td class="px-4 py-3">{{ $motor->tahun }}</td>
-                <td class="px-4 py-3">{{ $motor->nomor_plat }}</td>
-                <td class="px-4 py-3">{{ $motor->warna }}</td>
-                <td class="px-4 py-3">
-                    {!! $motor->motorHarga 
-                        ? 'Rp' . number_format($motor->motorHarga->harga_12_jam, 0, ',', '.') . 
-                          ' <a href="' . url('admin/motorHarga/'.$motor->motorHarga->id.'/edit') . '" class="ml-3 text-teal-600 underline">Edit</a>'
-                        : '<a href="' . url('admin/motorHarga/create?motor_id=' . $motor->id) . '" class="text-red-600 underline">
-                              Tambah Harga
-                           </a>'
-                    !!}
-                    
-                </td>
-                <td class="px-4 py-3 text-center">
-                   
-                    <span class="{{ $motor->status === 'tersedia' ? 'text-green-600' : 'text-red-600' }}">
-                        {{ ucfirst($motor->status) }}
-                    </span>
+                <td class="px-4 py-3">{{ $renter->name }}</td>
+                <td class="px-4 py-3">{{ $renter->email }}</td>
+                <td class="px-4 py-3">{{ $renter->no_telp }}</td>
+                <td class="px-4 py-3">{{ $renter->no_identitas }}</td>
+                <td class="px-4 py-3 text-left">{{ \Illuminate\Support\Str::limit($renter->address, 50, '...') }}</td>
 
-                    <div class="mt-1 w-full">
-                        @if ($motor->status == 'tersedia')
-                        <a href="{{ url('admin/penyewaan/create?motor_id='. $motor->id) }}" 
-                            class="bg-teal-600 hover:bg-teal-700 text-white py-1.5 px-3 rounded-md text-sm">
-                            + Penyewaan
-                        </a>
+                {{-- Switch --}}
+                <td class="px-4 py-3">
+                   <div class="flex gap-x-3">
+                       
+                        <form action="{{ route('admin.renters.toggleStatus', $renter->id) }}" method="POST" id="toggle-status-form-{{ $renter->id }}">
+                            @csrf
+                            @method('PATCH')
+                            <!-- Toggle Switch -->
+                            <label class="inline-flex items-center cursor-pointer">
+                                <input 
+                                    type="checkbox" 
+                                    class="sr-only" 
+                                    {{ $renter->status == 'aktif' ? 'checked' : '' }} 
+                                    onchange="document.getElementById('toggle-status-form-{{ $renter->id }}').submit()"
+                                >
+                                <div 
+                                    class="w-10 h-6 rounded-full p-1 flex items-center transition-all duration-300
+                                        {{ $renter->status == 'aktif' ? 'bg-green-500' : 'bg-gray-500' }}">
+                                    <div 
+                                        class="w-4 h-4 bg-white rounded-full shadow-md transform transition-transform duration-300
+                                            {{ $renter->status == 'aktif' ? 'translate-x-4' : '' }}">
+                                    </div>
+                                </div>
+                            </label>
+                        </form>
+                        <p>{{ $renter->status }}</p>
+                   </div>
+
+                   <div class="mt-1 w-full">
+                    @if ($renter->status == 'aktif')
+                    <a href="{{ url('admin/penyewaan/create?renter_id='. $renter->id) }}" 
+                        class="bg-teal-600 hover:bg-teal-700 text-white py-1.5 px-3 rounded-md text-sm">
+                        + Penyewaan
+                    </a>
                     @endif
                     </div>
 
                 </td>
-                <td class="px-4 py-3 flex gap-2 justify-center">
-                    <a href="{{ url('admin/motor/'.$motor->id.'/edit') }}"
-                       class="bg-blue-500 hover:bg-blue-600 text-white py-1 px-3 rounded-md text-sm">
-                        Edit
-                    </a>
-                    <form action="{{ route('admin.motor.destroy', $motor->id) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" 
-                                class="bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded-md text-sm"
-                                onclick="return confirm('Are you sure?')">
-                            Hapus
-                        </button>
-                    </form>
+
+                {{-- Action Buttons --}}
+                <td class="px-4 py-3">
+                        <div class="">
+                            <div class="flex gap-2 justify-center items-center">
+                                <a href="{{ route('admin.renters.edit', $renter->id) }}" 
+                                    class="bg-blue-500 hover:bg-blue-600 text-white py-1 px-3 rounded-md text-sm">
+                                    Edit
+                                </a>                     
+        
+                                <form action="{{ route('admin.renters.destroy', $renter->id) }}" method="POST" class="inline-block">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" 
+                                            class="bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded-md text-sm"
+                                            onclick="return confirm('Are you sure?')">
+                                        Hapus
+                                    </button>
+                                </form>
+                        </div>
+
+                        
+
+                        {{-- Conditionally hide the Penyewaan button if status is "aktif" --}}
+                       
+
+                    </div>
                 </td>
+
+              
+
+
             </tr>
             @empty
             <tr>
@@ -163,9 +190,8 @@
         </tbody>
     </table>
 
-    <!-- Pagination -->
     <div class="mt-4">
-        {{ $motors->appends(request()->query())->links('pagination::tailwind') }}
+        {{ $renters->appends(request()->query())->links('pagination::tailwind') }}
     </div>
 
     

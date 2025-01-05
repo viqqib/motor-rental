@@ -231,7 +231,7 @@ class MotorsController extends Controller
                 $constraint->aspectRatio(); // Maintain aspect ratio
                 $constraint->upsize(); // Prevent upscale
             })
-            ->encode('jpg', 75); // Compress to 75% quality
+            ->encode('jpg', 70); // Compress to 75% quality
 
         // Save the compressed image
         $path = 'photo-motor/' . $filename;

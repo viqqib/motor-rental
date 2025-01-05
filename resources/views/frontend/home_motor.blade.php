@@ -6,7 +6,7 @@
         <h2 class="font-semibold md:text-4xl text-xl">Tersedia Untuk Disewa</h2>
     </div>
 
-    <div class="w-full mx-auto md:px-0 lg:px-44 h-auto py-6 flex flex-wrap md:flex-row gap-x-5 justify-center gap-y-4 mt-5">
+    <div class="w-full mx-auto md:px-0 lg:px-44 h-auto md:py-6 flex flex-wrap md:flex-row gap-x-5 justify-center gap-y-4 mt-5">
         <!-- Loop through the motors -->
 
         <div class="inline-flex flex-wrap md:gap-x-8 gap-x-3 w-96 md:w-full justify-center gap-y-4">

@@ -11,6 +11,9 @@
     <div class="p-5 mt-5">
         @include('frontend.home_whyus')
     </div>
+    <div class="p-5 mt-5 bg-white">
+        @include('frontend.home_review')
+    </div>
 
     
 

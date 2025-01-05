@@ -6,6 +6,8 @@ use App\Http\Controllers\Admin\ContentHomepageController;
 use App\Http\Controllers\Admin\HomepageSettingsController;
 use App\Http\Controllers\Admin\MotorsController;
 use App\Http\Controllers\Admin\MotorsHargaController;
+use App\Http\Controllers\Admin\RentalsController;
+use App\Http\Controllers\Admin\RentersController;
 use App\Http\Controllers\Admin\SessionController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\SettingsSocialLinksController;
@@ -36,6 +38,8 @@ Route::get('/kontak', [ContactPageController::class, 'index']);
 Route::get('/motor', [MotorController::class, 'index'])->name('motor.index');
 Route::get('/motor/{id}', [MotorController::class, 'show'])->name('motor.show');
 
+Route::post('/submit-review', [HomeController::class, 'storeReview'])->name('submit.review');
+
 // Admin Routes
 Route::get('/admin', [AdminController::class, 'index'])->middleware('is_admin');
 
@@ -47,7 +51,13 @@ Route::prefix('admin')
     ->group(function () {
         Route::resource('motor', MotorsController::class);
         Route::resource('motorHarga', MotorsHargaController::class);
+        Route::resource('renters', RentersController::class);
+        Route::resource('penyewaan', RentalsController::class);
     });
+
+Route::patch('admin/renters/{id}/toggle-status', [RentersController::class, 'toggleStatus'])->name('admin.renters.toggleStatus');
+Route::patch('admin/penyewaan/{id}/toggle-status', [RentalsController::class, 'toggleStatus'])->name('admin.penyewaan.toggleStatus');
+
 
 // Admin Routes - Content Homepage
 Route::prefix('admin/content')

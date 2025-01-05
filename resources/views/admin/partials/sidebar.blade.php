@@ -36,6 +36,22 @@
             </div>
         </a>
 
+        <a href="{{ url('/admin/penyewaan') }}" class="sidebar-link {{ Request::is('admin/penyewaan') ? 'active' : '' }}">
+            <div class="flex items-center">
+                <i class="fa-solid fa-receipt text-teal-600 text-lg"></i>
+                <h1 class="ml-4">Penyewaan</h1>
+            </div>
+        </a>
+
+        <a href="{{ url('/admin/renters') }}" class="sidebar-link {{ Request::is('admin/renters') ? 'active' : '' }}">
+            <div class="flex items-center">
+                <i class="fa-solid fa-user text-teal-600 text-lg"></i>
+                <h1 class="ml-4">Penyewa</h1>
+            </div>
+        </a>
+
+      
+
         <div class="h-[1px] bg-gray-300 my-4 w-full"></div>
 
         <!-- Dropdown Link -->

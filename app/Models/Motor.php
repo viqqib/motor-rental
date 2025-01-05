@@ -21,4 +21,10 @@ class Motor extends Model
     {
         return $this->hasOne(MotorHarga::class, 'id_motor');
     }
+
+    public function rentals()
+    {
+        return $this->hasMany(Rental::class, 'id_motor');
+    }
+
 }

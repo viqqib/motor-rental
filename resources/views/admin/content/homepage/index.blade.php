@@ -25,26 +25,26 @@
         </div>
     
         <div class="mb-6">
-            <label for="tag" class="block text-gray-700 font-semibold mb-2">Heading 2 (Tag)</label>
+            <label for="tag" class="block text-gray-700 font-semibold mb-2">Heading 2</label>
             <input type="text" id="tag" name="tag" value="{{ old('tag', $heroContent->tag ?? '') }}" 
                 class="shadow-sm appearance-none border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-teal-400" required>
         </div>
     
         <div class="mb-6">
-            <label for="content" class="block text-gray-700 font-semibold mb-2">Content</label>
+            <label for="content" class="block text-gray-700 font-semibold mb-2">Konten</label>
             <textarea id="content" name="content" rows="4" 
                 class="shadow-sm appearance-none border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-teal-400" required>{{ old('content', $heroContent->content ?? '') }}</textarea>
         </div>
     
         <div class="mb-6">
-            <label for="image" class="block text-gray-700 font-semibold mb-2">Image</label>
+            <label for="image" class="block text-gray-700 font-semibold mb-2">Gambar</label>
             <input type="file" id="image" name="image" 
                 class="shadow-sm appearance-none border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-teal-400">
         </div>
     
         @if ($heroContent && $heroContent->image)
             <div class="mb-6">
-                <label class="block text-gray-700 font-semibold mb-2">Current Image</label>
+                <label class="block text-gray-700 font-semibold mb-2">Gambar sekarang :</label>
                 <img src="{{ asset('storage/' . $heroContent->image) }}" alt="Current Hero Image" class="w-32 h-auto rounded-md">
             </div>
         @endif
